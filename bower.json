@@ -1,0 +1,17 @@
+{
+  "name": "psAngularTs",
+  "version": "0.0.0",
+  "homepage": "https://github.com/krasevych/psAngularTs",
+  "authors": [
+    "Krasevych <krasevych@animatron.com>"
+  ],
+  "description": "Priject Structure Angular TypeScript",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
