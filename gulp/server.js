@@ -58,6 +58,7 @@ module.exports = function(options) {
 };
 
 
+/*
 
 gulp.task('browser-sync', ['watch'], function () {
   const url = require('url');
@@ -88,4 +89,4 @@ gulp.task('browser-sync', ['watch'], function () {
       debounceDelay: 50
     }
   });
-});
+});*/

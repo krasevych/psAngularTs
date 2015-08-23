@@ -1,4 +1,4 @@
-const gulp:gulp.Gulp = require('gulp'),
+const gulp = require('gulp'),
     gutil = require('gulp-util'),
     wrench = require('wrench');
 

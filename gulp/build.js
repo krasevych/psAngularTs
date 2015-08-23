@@ -42,7 +42,11 @@ module.exports = function(options) {
       .pipe(assets = $.useref.assets())
       .pipe($.rev())
       .pipe(jsFilter)
-      .pipe($.ngAnnotate())
+      .pipe($.ngAnnotate({
+          add: true,
+          remove: true,
+          regexp: /^[a-zA-Z0-9_\$\.\s\]\[\']+$/
+        }))
       .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify'))
       .pipe(jsFilter.restore())
       .pipe(cssFilter)
