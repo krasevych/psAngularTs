@@ -5,27 +5,25 @@ const gulp = require('gulp'),
 module.exports = options =>
     gulp.task('inject', ['scripts', 'styles'],  () => {
         var injectStyles = gulp.src([
-            options.tmp + '/serve/app/**/*.css',
-            '!' + options.tmp + '/serve/app/vendor.css'
+            options.tmp + '/app/**/*.css',
+            '!' + options.tmp + '/app/vendor.css'
         ], {read: false});
 
-        var sortOutput = require('../' + options.tmp + '/sortOutput.json');
 
         var injectScripts = gulp.src([
-            `${options.tmp}/serve/app/**/bootstrap.js`,
-            `!${options.tmp}/serve/app/index.js`
-        ], {read: false})
-            .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}));
+            `${options.tmp}/app/**/bootstrap.js`,
+            `!${options.tmp}/app/index.js`
+        ], {read: false});
 
         var injectOptions = {
-            ignorePath: [options.src, options.tmp + '/serve'],
+            ignorePath: [options.src, options.tmp],
             addRootSlash: false
         };
 
-        return gulp.src(options.src + '/*.html')
+        return gulp.src(`${options.src}/*.html`)
             .pipe($.inject(injectStyles, injectOptions))
             .pipe($.inject(injectScripts, injectOptions))
             .pipe(wiredep(options.wiredep))
-            .pipe(gulp.dest(options.tmp + '/serve'));
+            .pipe(gulp.dest(options.tmp));
 
     });

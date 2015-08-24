@@ -18,8 +18,7 @@ module.exports = options =>
                 module: 'commonjs'
             })).on('error', options.errorHandler('TypeScript'))
             .pipe($.sourcemaps.write())
-            .pipe($.toJson({filename: `${options.tmp}/sortOutput.json`, relative: true}))
-            .pipe(gulp.dest(`${options.tmp}/serve/app`))
+            .pipe(gulp.dest(`${options.tmp}/app`))
             .pipe(browserSync.reload({stream: true}))
             .pipe($.size());
     });

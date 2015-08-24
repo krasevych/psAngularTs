@@ -29,11 +29,11 @@ module.exports = options => {
 
     browserSync.use(browserSyncSpa({selector: '[ng-app]'}));
 
-    gulp.task('serve', ['watch'], () => browserSyncInit([`${options.tmp}/serve`, options.src]));
+    gulp.task('serve', ['watch'], () => browserSyncInit([options.tmp, options.src]));
 
     gulp.task('serve:dist', ['build'], () => browserSyncInit(options.dist));
 
-    gulp.task('serve:e2e', ['inject'], () => browserSyncInit([`${options.tmp}/serve`, options.src], []));
+    gulp.task('serve:e2e', ['inject'], () => browserSyncInit([options.tmp, options.src], []));
 
     gulp.task('serve:e2e-dist', ['build'], () => browserSyncInit(options.dist, []));
 };

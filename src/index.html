@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!--<link rel="stylesheet" href="app/vendor.css">-->
+    <link rel="stylesheet" href="app/vendor.css">
     <!-- bower:css -->
     <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
@@ -25,14 +25,15 @@
   </head>
   <body ng-strict-di ng-controller="AppController as app">
   <ul class="nav navbar-nav">
-    <li><a ng-link="welcome">welcome</a></li>
+    <li><a ng-href="/welcome">welcome</a></li>
   </ul>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <div class="page-host">
-    <ng-viewport></ng-viewport>
+  <div class="page-host" layout="row">
+    <div flex="30" ng-viewport="left"></div>
+    <div flex="70" ng-viewport="right"></div>
   </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

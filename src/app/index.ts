@@ -1,9 +1,16 @@
 import './components/welcome/welcome.js';
+import './components/menu/menu.js';
 
 class AppController {
     constructor($router: any) {
         $router.config([
-            {path: '/welcome', component: 'welcome'},
+            {
+                path: '/welcome',
+                component: {
+                    left: 'menu',
+                    right: 'welcome'
+                }
+            },
             {path: '/flickr', component: 'flickr'},
             {path: '/settings', component: 'settings'}
         ]);
