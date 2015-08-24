@@ -8,6 +8,7 @@
     "angular-resource": "~1.4.1",
     "angular-sanitize": "~1.4.1",
     "angular-new-router": "~0.5.3",
+    "angular-material": "~0.10.1",
     "angular": "~1.4.1"
   },
   "devDependencies": {

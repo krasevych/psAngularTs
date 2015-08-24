@@ -1,13 +1,10 @@
-'use strict';
-
-var gulp = require('gulp');
-
-var $ = require('gulp-load-plugins')({
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-module.exports = function(options) {
-  gulp.task('partials', ['markups'], function () {
+module.exports = options => {
+  gulp.task('partials', ['views'], function () {
     return gulp.src([
       options.src + '/app/**/*.html',
       options.tmp + '/serve/app/**/*.html'

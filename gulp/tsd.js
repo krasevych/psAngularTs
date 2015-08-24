@@ -23,17 +23,17 @@ module.exports = function() {
       query.addNamePattern(dependency);
     });
 
-    var options = new tsd.Options();
-    options.resolveDependencies = true;
-    options.overwriteFiles = true;
-    options.saveBundle = true;
+    var tsdOptions = new tsd.Options();
+    tsdOptions.resolveDependencies = true;
+    tsdOptions.overwriteFiles = true;
+    tsdOptions.saveBundle = true;
 
     return tsdApi.readConfig()
       .then(function () {
-        return tsdApi.select(query, options);
+        return tsdApi.select(query, tsdOptions);
       })
       .then(function (selection) {
-        return tsdApi.install(selection, options);
+        return tsdApi.install(selection, tsdOptions);
       })
       .then(function (installResult) {
         var written = Object.keys(installResult.written.dict);
