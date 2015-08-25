@@ -23,10 +23,9 @@ const options = {
     },
     wiredep: {
         directory: 'bower_components',
-        exclude: [/jquery/, /bootstrap\.js/, /bootstrap\.css/],
         overrides: {
             'angular-new-router': {
-                'main': 'dist/router.es5.min.js'
+                'main': 'dist/router.es5.js'
             }
         }
     }
