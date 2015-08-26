@@ -9,7 +9,6 @@ module.exports = options =>
             '!' + options.tmp + '/app/vendor.css'
         ], {read: false});
 
-
         const injectScripts = gulp.src(`${options.tmp}/app/system.config.js`, {read: false});
 
         const injectOptions = {
