@@ -1,5 +1,6 @@
-import './components/welcome/welcome.js';
-import './components/menu/menu.js';
+/// <reference path="../../.tmp/typings/tsd.d.ts" />
+import welcome from 'components/welcome/welcome';
+import menu from 'components/menu/menu';
 
 class AppController {
     constructor($router: any) {
@@ -10,18 +11,23 @@ class AppController {
                     left: 'menu',
                     right: 'welcome'
                 }
-            },
-            {path: '/flickr', component: 'flickr'},
-            {path: '/settings', component: 'settings'}
+            }
         ]);
     }
 }
-angular.module('testing')
+
+angular.module('testing', [
+    welcome.name,
+    menu.name,
+    'ngCookies',
+    'ngTouch',
+    'ngSanitize',
+    'ngNewRouter',
+    'ngMaterial'
+])
     .controller('AppController', AppController)
     .config(($componentLoaderProvider: any,
              $locationProvider: any) => {
-        console.log($componentLoaderProvider);
-
         $componentLoaderProvider.setTemplateMapping((name: string) =>
             `app/components/${name}/${name}.html`);
 
@@ -31,3 +37,4 @@ angular.module('testing')
         $locationProvider.html5Mode(true);
     });
 
+angular.bootstrap(document, ['testing']);

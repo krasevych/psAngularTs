@@ -11,7 +11,7 @@ module.exports = options =>
 
 
         var injectScripts = gulp.src([
-            `${options.tmp}/app/**/bootstrap.js`,
+            `${options.tmp}/app/system.config.js`,
             `!${options.tmp}/app/index.js`
         ], {read: false});
 
@@ -22,7 +22,7 @@ module.exports = options =>
 
         return gulp.src(`${options.src}/*.html`)
             .pipe($.inject(injectStyles, injectOptions))
-            //.pipe($.inject(injectScripts, injectOptions))
+            .pipe($.inject(injectScripts, injectOptions))
             .pipe(wiredep(options.wiredep))
             .pipe(gulp.dest(options.tmp));
 
