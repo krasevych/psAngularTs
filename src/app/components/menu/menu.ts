@@ -1,8 +1,9 @@
-export class MenuCtrl {
+class MenuCtrl {
     heading: string;
 
     constructor() {
         this.heading = 'Welcome to The New Angular Router Demo!';
     }
 }
-angular.module('testing').controller('MenuCtrl', MenuCtrl);
+export default angular.module('menu', [])
+    .controller('MenuCtrl', MenuCtrl);

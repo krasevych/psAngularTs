@@ -63,7 +63,15 @@
     <!-- endbuild -->
 
     <script>
-      System.import('app/bootstrap.js');
+      System.config({
+        "baseURL": "",
+        "defaultJSExtensions": true,
+        "paths": {
+          "components/*": "app/components/*"
+        }
+      });
+
+      System.import('app/index.js');
     </script>
 
   </body>
