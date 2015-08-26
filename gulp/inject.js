@@ -22,7 +22,7 @@ module.exports = options =>
 
         return gulp.src(`${options.src}/*.html`)
             .pipe($.inject(injectStyles, injectOptions))
-            .pipe($.inject(injectScripts, injectOptions))
+            //.pipe($.inject(injectScripts, injectOptions))
             .pipe(wiredep(options.wiredep))
             .pipe(gulp.dest(options.tmp));
 

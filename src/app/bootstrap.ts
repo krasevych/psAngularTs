@@ -9,5 +9,5 @@ angular.module('testing', [
     'ngMaterial'
 ]);
 
-System.import('index.js').then(() =>
+System.import('./app/index.js').then(() =>
     angular.bootstrap(document, ['testing']));
