@@ -1,13 +1,20 @@
-const gulp:gulp.Gulp = require('gulp'),
+const gulp = require('gulp'),
     gutil = require('gulp-util'),
     wrench = require('wrench');
-
 
 const options = {
     src: 'src',
     dist: 'dist',
     tmp: '.tmp',
-    e2e: 'e2e',
+    path: {
+        js: 'src/**/*.js',
+        html: '**/*.html',
+        json: '**/*.html',
+        templates: 'src/**/*.html',
+        less: ['src/**/*.less', '!src/assets/**/*.less'],
+        output: 'dist/',
+        outputCss: 'dist/**/*.css'
+    },
     errorHandler: function (title) {
         return function (err) {
             gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
@@ -16,7 +23,11 @@ const options = {
     },
     wiredep: {
         directory: 'bower_components',
-        exclude: [/jquery/, /bootstrap\.js/, /bootstrap\.css/]
+        overrides: {
+            'angular-new-router': {
+                'main': 'dist/router.es5.js'
+            }
+        }
     }
 };
 

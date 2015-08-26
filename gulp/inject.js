@@ -1,37 +1,29 @@
-'use strict';
+const gulp = require('gulp'),
+    $ = require('gulp-load-plugins')(),
+    wiredep = require('wiredep').stream;
 
-var gulp = require('gulp');
+module.exports = options =>
+    gulp.task('inject', ['scripts', 'styles'],  () => {
+        var injectStyles = gulp.src([
+            options.tmp + '/app/**/*.css',
+            '!' + options.tmp + '/app/vendor.css'
+        ], {read: false});
 
-var $ = require('gulp-load-plugins')();
 
-var wiredep = require('wiredep').stream;
+        var injectScripts = gulp.src([
+            `${options.tmp}/app/**/bootstrap.js`,
+            `!${options.tmp}/app/index.js`
+        ], {read: false});
 
-module.exports = function(options) {
-  gulp.task('inject', ['scripts', 'styles'], function () {
-    var injectStyles = gulp.src([
-      options.tmp + '/serve/app/**/*.css',
-      '!' + options.tmp + '/serve/app/vendor.css'
-    ], { read: false });
+        var injectOptions = {
+            ignorePath: [options.src, options.tmp],
+            addRootSlash: false
+        };
 
-    var sortOutput = require('../' + options.tmp + '/sortOutput.json');
+        return gulp.src(`${options.src}/*.html`)
+            .pipe($.inject(injectStyles, injectOptions))
+            //.pipe($.inject(injectScripts, injectOptions))
+            .pipe(wiredep(options.wiredep))
+            .pipe(gulp.dest(options.tmp));
 
-    var injectScripts = gulp.src([
-      '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.js',
-      '!' + options.src + '/app/**/*.spec.js',
-      '!' + options.src + '/app/**/*.mock.js'
-    ], { read: false })
-    .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}));
-
-    var injectOptions = {
-      ignorePath: [options.src, options.tmp + '/serve'],
-      addRootSlash: false
-    };
-
-    return gulp.src(options.src + '/*.html')
-      .pipe($.inject(injectStyles, injectOptions))
-      .pipe($.inject(injectScripts, injectOptions))
-      .pipe(wiredep(options.wiredep))
-      .pipe(gulp.dest(options.tmp + '/serve'));
-
-  });
-};
+    });

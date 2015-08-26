@@ -1,24 +1,33 @@
-/// <reference path="../../.tmp/typings/tsd.d.ts" />
+import './components/welcome/welcome.js';
+import './components/menu/menu.js';
 
-/// <reference path="main/main.controller.ts" />
-/// <reference path="../app/components/navbar/navbar.controller.ts" />
-
-module testing {
-  'use strict';
-
-  angular.module('testing', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap'])
-    .controller('MainCtrl', MainCtrl)
-    .controller('NavbarCtrl', NavbarCtrl)
-
-  .config(function ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
-    $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
-      });
-
-    $urlRouterProvider.otherwise('/');
-  })
-;
+class AppController {
+    constructor($router: any) {
+        $router.config([
+            {
+                path: '/welcome',
+                component: {
+                    left: 'menu',
+                    right: 'welcome'
+                }
+            },
+            {path: '/flickr', component: 'flickr'},
+            {path: '/settings', component: 'settings'}
+        ]);
+    }
 }
+angular.module('testing')
+    .controller('AppController', AppController)
+    .config(($componentLoaderProvider: any,
+             $locationProvider: any) => {
+        console.log($componentLoaderProvider);
+
+        $componentLoaderProvider.setTemplateMapping((name: string) =>
+            `app/components/${name}/${name}.html`);
+
+        $componentLoaderProvider.setCtrlNameMapping((name: string) =>
+            `${name[0].toUpperCase()}${name.substr(1)}Ctrl`);
+
+        $locationProvider.html5Mode(true);
+    });
+

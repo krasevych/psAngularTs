@@ -1,62 +1,44 @@
-'use strict';
+const gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    path = require('path'),
+    tsd = require('tsd'),
+    tsdJson = 'tsd.json',
+    tsdApi = new tsd.getAPI(tsdJson);
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
+module.exports = () => {
+    gulp.task('tsd:install', () => {
+        const bower = require(path.join(process.cwd(), 'bower.json'));
 
-var path = require('path');
-var tsd = require('tsd');
+        const dependencies = [].concat(
+            Object.keys(bower.dependencies),
+            Object.keys(bower.devDependencies)
+        );
 
-var tsdJson = 'tsd.json';
-var tsdApi = new tsd.getAPI(tsdJson);
+        const query = new tsd.Query();
+        dependencies.forEach(dependency => query.addNamePattern(dependency));
 
-module.exports = function() {
-  gulp.task('tsd:install', function () {
-    var bower = require(path.join(process.cwd(), 'bower.json'));
+        const tsdOptions = new tsd.Options();
+        tsdOptions.resolveDependencies = true;
+        tsdOptions.overwriteFiles = true;
+        tsdOptions.saveBundle = true;
 
-    var dependencies = [].concat(
-      Object.keys(bower.dependencies),
-      Object.keys(bower.devDependencies)
-    );
+        return tsdApi.readConfig()
+            .then(() => tsdApi.select(query, tsdOptions))
+            .then(selection => tsdApi.install(selection, tsdOptions))
+            .then(installResult => {
+                const written = Object.keys(installResult.written.dict),
+                    removed = Object.keys(installResult.removed.dict),
+                    skipped = Object.keys(installResult.skipped.dict);
 
-    var query = new tsd.Query();
-    dependencies.forEach(function (dependency) {
-      query.addNamePattern(dependency);
+                written.forEach(name => gutil.log(`Definition file written: ${name}`));
+
+                removed.forEach(name => gutil.log(`Definition file removed: ${name}`));
+
+                skipped.forEach(name => gutil.log(`Definition file skipped: ${name}`));
+            });
     });
 
-    var options = new tsd.Options();
-    options.resolveDependencies = true;
-    options.overwriteFiles = true;
-    options.saveBundle = true;
+    gulp.task('tsd:purge', () => tsdApi.purge(true, true));
 
-    return tsdApi.readConfig()
-      .then(function () {
-        return tsdApi.select(query, options);
-      })
-      .then(function (selection) {
-        return tsdApi.install(selection, options);
-      })
-      .then(function (installResult) {
-        var written = Object.keys(installResult.written.dict);
-        var removed = Object.keys(installResult.removed.dict);
-        var skipped = Object.keys(installResult.skipped.dict);
-
-        written.forEach(function (dts) {
-          gutil.log('Definition file written: ' + dts);
-        });
-
-        removed.forEach(function (dts) {
-          gutil.log('Definition file removed: ' + dts);
-        });
-
-        skipped.forEach(function (dts) {
-          gutil.log('Definition file skipped: ' + dts);
-        });
-      });
-  });
-
-  gulp.task('tsd:purge', function () {
-    return tsdApi.purge(true, true);
-  });
-
-  gulp.task('tsd', ['tsd:install']);
+    gulp.task('tsd', ['tsd:install']);
 };
