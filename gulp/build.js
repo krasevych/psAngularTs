@@ -6,12 +6,14 @@ const $ = require('gulp-load-plugins')({
 
 module.exports = options => {
     gulp.task('sys-build', ['inject', 'partials'], cb => {
-        new Builder({
-            baseURL: '.tmp/app'
-        })
-            .build('**/*.js', '.tmp/partials/script.js')
-            .catch(err => console.log(`Build error ${err}`))
-            .finally(cb);
+        const builder = new Builder();
+
+        builder.loadConfig('.tmp/app/system.config.js').then(() => {
+            builder.config({baseURL: '.tmp/app'});
+            return builder.build('**/*.js - system.config.js', '.tmp/partials/script.js')
+                .catch(err => console.log(`Build error ${err}`))
+                .finally(cb)
+        });
     });
 
     gulp.task('partials', ['views'], () =>
@@ -87,9 +89,9 @@ module.exports = options => {
 
     gulp.task('other', ['sys-build'], () =>
         gulp.src([
-            //`${options.src}/**/*`,
+            `${options.src}/**/*`,
             `${options.tmp}/**/*.html`,
-            //`!${options.src}/**/*.{html,css,js,less,ts,jade}`
+            `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
             .pipe($.minifyHtml({
                 empty: true,
