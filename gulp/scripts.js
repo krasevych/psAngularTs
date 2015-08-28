@@ -7,7 +7,8 @@ module.exports = options =>
     gulp.task('scripts', ['tsd:install'], () => {
         mkdirp.sync(options.tmp);
 
-        return gulp.src([`${options.src}/app/**/*.ts`, 'system.config.ts'])
+        return gulp.src(`${options.src}/app/**/*.ts`)
+            .pipe($.cached('scripts'))
             .pipe($.sourcemaps.init())
             .pipe($.tslint())
             .pipe($.tslint.report('prose', {

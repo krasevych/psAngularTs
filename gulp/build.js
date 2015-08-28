@@ -1,21 +1,9 @@
-const gulp = require('gulp'),
-    Builder = require('systemjs-builder');
+const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
 module.exports = options => {
-    gulp.task('sys-build', ['inject', 'partials'], cb => {
-        const builder = new Builder();
-
-        builder.loadConfig('.tmp/app/system.config.js').then(() => {
-            builder.config({baseURL: '.tmp/app'});
-            return builder.build('**/*.js - system.config.js', '.tmp/partials/script.js')
-                .catch(err => console.log(`Build error ${err}`))
-                .finally(cb)
-        });
-    });
-
     gulp.task('partials', ['views'], () =>
             gulp.src([
                 `${options.src}/app/**/*.html`,
@@ -33,8 +21,8 @@ module.exports = options => {
                 .pipe(gulp.dest(`${options.tmp}/partials/`))
     );
 
-    gulp.task('html', ['sys-build'], () => {
-        const partialsInjectFile = gulp.src(`${options.tmp}/partials/*.js`, {read: false});
+    gulp.task('html', ['inject', 'partials'], () => {
+        const partialsInjectFile = gulp.src(`${options.tmp}/partials/templateCache.js`, {read: false});
         const partialsInjectOptions = {
             starttag: '<!-- inject:partials -->',
             ignorePath: options.tmp + '/partials',
@@ -87,21 +75,14 @@ module.exports = options => {
                 .pipe(gulp.dest(`${options.dist}/fonts/`))
     );
 
-    gulp.task('other', ['sys-build'], () =>
+    gulp.task('other', () =>
         gulp.src([
             `${options.src}/**/*`,
-            `${options.tmp}/**/*.html`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
-            .pipe($.minifyHtml({
-                empty: true,
-                spare: true,
-                quotes: true,
-                conditionals: true
-            }))
             .pipe(gulp.dest(`${options.dist}/`)));
 
     gulp.task('clean', ['tsd:purge'], done => $.del([`${options.dist}/`, `${options.tmp}/`], done));
 
-    gulp.task('build', ['html', 'fonts', 'other'], () => gulp.start('sys-build'));
+    gulp.task('build', ['html', 'fonts', 'other']);
 };

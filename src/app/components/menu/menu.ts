@@ -1,9 +1,11 @@
+/// <reference path="../../../../.tmp/typings/tsd.d.ts" />
+
 class MenuCtrl {
     heading: string;
 
     constructor() {
-        this.heading = 'Welcome to The New Angular Router Demo!';
+        this.heading = 'Welcome to The New Angular Router Demo!!!';
     }
 }
-export default angular.module('menu', [])
+angular.module('testing')
     .controller('MenuCtrl', MenuCtrl);

@@ -9,10 +9,14 @@ module.exports = options =>
             '!' + options.tmp + '/app/vendor.css'
         ], {read: false});
 
-        const injectScripts = gulp.src(`${options.tmp}/app/system.config.js`, {read: false});
+        const injectScripts = gulp.src(
+            `${options.tmp}/app/**/*.js`,
+            //`!${options.tmp}/app/index.js`,
+            {read: false}
+        );
 
         const injectOptions = {
-            ignorePath: [options.src, options.tmp],
+            ignorePath: [options.src, `${options.tmp}/app`],
             addRootSlash: false
         };
 
@@ -21,5 +25,4 @@ module.exports = options =>
             .pipe($.inject(injectScripts, injectOptions))
             .pipe(wiredep(options.wiredep))
             .pipe(gulp.dest(options.tmp));
-
     });

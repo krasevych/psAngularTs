@@ -2,7 +2,6 @@
   "name": "testing",
   "version": "0.0.0",
   "dependencies": {
-    "system.js": "~0.18.11",
     "angular-cookies": "~1.4.1",
     "angular-touch": "~1.4.1",
     "angular-resource": "~1.4.1",

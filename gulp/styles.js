@@ -35,6 +35,8 @@ module.exports = options =>
             `${options.src}/app/index.less`,
             `${options.src}/app/vendor.less`
         ])
+
+            .pipe($.cached('styles'))
             .pipe(indexFilter)
             .pipe($.inject(injectFiles, injectOptions))
             .pipe(indexFilter.restore())
