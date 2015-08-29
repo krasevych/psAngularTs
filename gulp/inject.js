@@ -16,7 +16,7 @@ module.exports = options =>
         );
 
         const injectOptions = {
-            ignorePath: [options.src, `${options.tmp}/app`],
+            ignorePath: [options.src, options.tmp],
             addRootSlash: false
         };
 
