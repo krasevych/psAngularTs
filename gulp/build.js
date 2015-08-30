@@ -48,7 +48,6 @@ module.exports = options => {
             .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', options.errorHandler('Uglify'))
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
-            .pipe($.replace('../../bower_components/bootstrap/fonts/', '../fonts/'))
             .pipe($.csso())
             .pipe(cssFilter.restore())
             .pipe(assets.restore())
@@ -78,6 +77,7 @@ module.exports = options => {
     gulp.task('other', () =>
         gulp.src([
             `${options.src}/**/*`,
+            `!${options.src}/{app,app/**}`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
             .pipe(gulp.dest(`${options.dist}/`)));

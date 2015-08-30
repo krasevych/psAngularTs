@@ -21,5 +21,7 @@ module.exports = options =>
             .pipe($.sourcemaps.write())
             .pipe(gulp.dest(`${options.tmp}/app`))
             .pipe(browserSync.reload({stream: true}))
-            .pipe($.size());
+            .pipe($.size({
+                title:'js size'
+            }));
     });
