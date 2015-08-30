@@ -1,4 +1,5 @@
-const gulp = require('gulp');
+const gulp = require('gulp'),
+    runSequence = require('run-sequence');
 const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
@@ -65,8 +66,6 @@ module.exports = options => {
             .pipe($.size({title: `${options.dist}/`, showFiles: true}));
     });
 
-    // Only applies for fonts from bower dependencies
-    // Custom fonts are handled by the 'other' task
     gulp.task('fonts', () =>
             gulp.src($.mainBowerFiles())
                 .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
@@ -82,7 +81,9 @@ module.exports = options => {
         ])
             .pipe(gulp.dest(`${options.dist}/`)));
 
-    gulp.task('clean', ['tsd:purge'], done => $.del([`${options.dist}/`, `${options.tmp}/`], done));
+    gulp.task('clean', ['tsd:purge'], done =>
+        $.del([`${options.dist}/`, `${options.tmp}/`], done));
 
-    gulp.task('build', ['html', 'fonts', 'other']);
+    gulp.task('build', cb =>
+        runSequence('clean', ['html', 'fonts', 'other'], cb));
 };
