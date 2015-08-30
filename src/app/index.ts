@@ -1,8 +1,8 @@
 /// <reference path="../../.tmp/typings/tsd.d.ts" />
-/// <reference path="components/welcome/welcome.ts" />
 /// <reference path="menu/menu.ts" />
 
 class AppController {
+    /*@ngInject*/
     static config($locationProvider: angular.ILocationProvider,
                   $stateProvider: angular.ui.IStateProvider,
                   $urlRouterProvider: angular.ui.IUrlRouterProvider) {
@@ -14,12 +14,12 @@ class AppController {
                 abstract: true,
                 url: '',
                 views: {
-                    main: {
-                        template: '<div ui-view></div>'
-                    },
                     header: {
                         templateUrl: 'common/components/header/header.html',
                         controller: 'HeaderCtrl'
+                    },
+                    main: {
+                        template: '<div ui-view></div>'
                     },
                     footer: {
                         templateUrl: 'common/components/footer/footer.html'

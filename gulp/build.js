@@ -7,8 +7,7 @@ const $ = require('gulp-load-plugins')({
 module.exports = options => {
     gulp.task('partials', ['views'], () =>
             gulp.src([
-                `${options.src}/app/**/*.html`,
-                `${options.tmp}/app/**/*.html`
+                `${options.tmp}/**/*.html`
             ])
                 .pipe($.minifyHtml({
                     empty: true,
@@ -17,7 +16,7 @@ module.exports = options => {
                 }))
                 .pipe($.angularTemplatecache('templateCache.js', {
                     module: 'testing',
-                    root: 'app'
+                    root: ''
                 }))
                 .pipe(gulp.dest(`${options.tmp}/partials/`))
     );
@@ -41,11 +40,7 @@ module.exports = options => {
             .pipe(assets = $.useref.assets())
             .pipe($.rev())
             .pipe(jsFilter)
-            .pipe($.ngAnnotate({
-                add: true,
-                remove: true,
-                regexp: /^[a-zA-Z0-9_\$\.\s\]\[\']+$/
-            }))
+            .pipe($.ngAnnotate())
             .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', options.errorHandler('Uglify'))
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
@@ -76,7 +71,7 @@ module.exports = options => {
     gulp.task('other', () =>
         gulp.src([
             `${options.src}/**/*`,
-            `!${options.src}/{app,app/**}`,
+            `!${options.src}/{app,app/**,common,common/**}`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
             .pipe(gulp.dest(`${options.dist}/`)));

@@ -4,7 +4,7 @@ const gulp = require('gulp'),
 
 module.exports = options =>
     gulp.task('styles', () =>
-        gulp.src(`${options.src}/**/*.less`)
+        gulp.src(options.less)
             .pipe($.cached('styles'))
             .pipe($.sourcemaps.init())
             .pipe($.less({

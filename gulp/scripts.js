@@ -7,7 +7,7 @@ module.exports = options =>
     gulp.task('scripts', ['tsd:install'], () => {
         mkdirp.sync(options.tmp);
 
-        return gulp.src(`${options.src}/**/*.ts`)
+        return gulp.src(options.ts)
             .pipe($.cached('scripts'))
             .pipe($.sourcemaps.init())
             .pipe($.tslint())
@@ -19,7 +19,7 @@ module.exports = options =>
                 module: 'commonjs'
             })).on('error', options.errorHandler('TypeScript'))
             .pipe($.sourcemaps.write())
-            .pipe(gulp.dest(`${options.tmp}`))
+            .pipe(gulp.dest(options.tmp))
             .pipe(browserSync.reload({stream: true}))
             .pipe($.size({
                 title:'js size'

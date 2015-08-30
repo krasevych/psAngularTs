@@ -6,6 +6,13 @@ const options = {
     src: 'src',
     dist: 'dist',
     tmp: '.tmp',
+    js: '.tmp/**/*.js',
+    html: '.tmp/**/*.html',
+    css: '.tmp/**/*.css',
+    ts: 'src/**/*.ts',
+    jade: 'src/**/*.jade',
+    less: 'src/**/*.less',
+    indexHtml: 'src/*.html',
     path: {
         js: 'src/**/*.js',
         html: '**/*.html',
@@ -21,12 +28,7 @@ const options = {
             this.emit('end');
         },
     wiredep: {
-        directory: 'bower_components',
-        overrides: {
-            'angular-new-router': {
-                'main': 'dist/router.es5.js'
-            }
-        }
+        directory: 'bower_components'
     }
 };
 

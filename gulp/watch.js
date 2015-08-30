@@ -5,11 +5,11 @@ const onlyChange = (event, task) =>
 
 module.exports = options =>
     gulp.task('watch', ['views', 'inject'], () => {
-        gulp.watch([`${options.src}/*.html`, 'bower.json'], ['inject']);
+        gulp.watch([options.indexHtml, 'bower.json'], ['inject']);
 
-        gulp.watch(`${options.src}/app/**/*.less`, event => onlyChange(event, 'styles'));
+        gulp.watch(options.less, event => onlyChange(event, 'styles'));
 
-        gulp.watch(`${options.src}/app/**/*.ts`, event => onlyChange(event, 'scripts'));
+        gulp.watch(options.ts, event => onlyChange(event, 'scripts'));
 
-        gulp.watch(`${options.src}/app/**/*.jade`, ['views']);
+        gulp.watch(options.jade, ['views']);
     });

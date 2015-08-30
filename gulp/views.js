@@ -5,7 +5,7 @@ const gulp = require('gulp'),
 const renameToHtml = path => path.extname = '.html';
 
 module.exports = options =>
-    gulp.task('views', () => gulp.src(`${options.src}/**/*.jade`)
+    gulp.task('views', () => gulp.src(options.jade)
             .pipe($.cached('views'))
             .pipe($.consolidate('jade', {
                 basedir: options.src,

@@ -7,6 +7,7 @@ class HomeCtrl {
         this.heading = 'Home Page';
     }
 
+    /*@ngInject*/
     static config($stateProvider: any) {
         $stateProvider.state('home', {
             parent: 'root',

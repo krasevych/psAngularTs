@@ -4,9 +4,10 @@ class MenuCtrl {
     heading: string;
 
     constructor() {
-        this.heading = 'Welcome to The New Angular Router Demo!!!';
+        this.heading = 'Welcome to The New Angular Router Demo!';
     }
 
+    /*@ngInject*/
     static config($stateProvider: any) {
         $stateProvider.state('menu', {
             parent: 'root',
