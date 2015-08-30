@@ -1,21 +1,10 @@
 const gulp = require('gulp'),
-    Builder = require('systemjs-builder');
+    runSequence = require('run-sequence');
 const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
 module.exports = options => {
-    gulp.task('sys-build', ['inject', 'partials'], cb => {
-        const builder = new Builder();
-
-        builder.loadConfig('.tmp/app/system.config.js').then(() => {
-            builder.config({baseURL: '.tmp/app'});
-            return builder.build('**/*.js - system.config.js', '.tmp/partials/script.js')
-                .catch(err => console.log(`Build error ${err}`))
-                .finally(cb)
-        });
-    });
-
     gulp.task('partials', ['views'], () =>
             gulp.src([
                 `${options.src}/app/**/*.html`,
@@ -33,8 +22,8 @@ module.exports = options => {
                 .pipe(gulp.dest(`${options.tmp}/partials/`))
     );
 
-    gulp.task('html', ['sys-build'], () => {
-        const partialsInjectFile = gulp.src(`${options.tmp}/partials/*.js`, {read: false});
+    gulp.task('html', ['inject', 'partials'], () => {
+        const partialsInjectFile = gulp.src(`${options.tmp}/partials/templateCache.js`, {read: false});
         const partialsInjectOptions = {
             starttag: '<!-- inject:partials -->',
             ignorePath: options.tmp + '/partials',
@@ -60,7 +49,6 @@ module.exports = options => {
             .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', options.errorHandler('Uglify'))
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
-            .pipe($.replace('../../bower_components/bootstrap/fonts/', '../fonts/'))
             .pipe($.csso())
             .pipe(cssFilter.restore())
             .pipe(assets.restore())
@@ -78,8 +66,6 @@ module.exports = options => {
             .pipe($.size({title: `${options.dist}/`, showFiles: true}));
     });
 
-    // Only applies for fonts from bower dependencies
-    // Custom fonts are handled by the 'other' task
     gulp.task('fonts', () =>
             gulp.src($.mainBowerFiles())
                 .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
@@ -87,21 +73,17 @@ module.exports = options => {
                 .pipe(gulp.dest(`${options.dist}/fonts/`))
     );
 
-    gulp.task('other', ['sys-build'], () =>
+    gulp.task('other', () =>
         gulp.src([
             `${options.src}/**/*`,
-            `${options.tmp}/**/*.html`,
+            `!${options.src}/{app,app/**}`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
-            .pipe($.minifyHtml({
-                empty: true,
-                spare: true,
-                quotes: true,
-                conditionals: true
-            }))
             .pipe(gulp.dest(`${options.dist}/`)));
 
-    gulp.task('clean', ['tsd:purge'], done => $.del([`${options.dist}/`, `${options.tmp}/`], done));
+    gulp.task('clean', ['tsd:purge'], done =>
+        $.del([`${options.dist}/`, `${options.tmp}/`], done));
 
-    gulp.task('build', ['html', 'fonts', 'other'], () => gulp.start('sys-build'));
+    gulp.task('build', cb =>
+        runSequence('clean', ['html', 'fonts', 'other'], cb));
 };

@@ -4,12 +4,9 @@ const gulp = require('gulp'),
 
 module.exports = options =>
     gulp.task('inject', ['scripts', 'styles'],  () => {
-        const injectStyles = gulp.src([
-            options.tmp + '/app/**/*.css',
-            '!' + options.tmp + '/app/vendor.css'
-        ], {read: false});
+        const injectStyles = gulp.src(`${options.tmp}/app/**/*.css`, {read: false});
 
-        const injectScripts = gulp.src(`${options.tmp}/app/system.config.js`, {read: false});
+        const injectScripts = gulp.src(`${options.tmp}/app/**/*.js`, {read: false});
 
         const injectOptions = {
             ignorePath: [options.src, options.tmp],
@@ -21,5 +18,4 @@ module.exports = options =>
             .pipe($.inject(injectScripts, injectOptions))
             .pipe(wiredep(options.wiredep))
             .pipe(gulp.dest(options.tmp));
-
     });

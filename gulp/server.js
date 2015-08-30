@@ -1,7 +1,8 @@
 const gulp = require('gulp'),
     browserSync = require('browser-sync'),
     browserSyncSpa = require('browser-sync-spa'),
-    util = require('util');
+    util = require('util'),
+    runSequence = require('run-sequence');
 
 module.exports = options => {
 
@@ -29,7 +30,9 @@ module.exports = options => {
 
     browserSync.use(browserSyncSpa({selector: '[ng-app]'}));
 
-    gulp.task('serve', ['watch'], () => browserSyncInit([options.tmp, options.src]));
+    //gulp.task('serve', ['watch'], () => browserSyncInit([options.tmp, options.src]));
+    gulp.task('serve', () =>
+        runSequence('clean', 'watch', () => browserSyncInit([options.tmp, options.src])));
 
     gulp.task('serve:dist', ['build'], () => browserSyncInit(options.dist));
 

@@ -1,6 +1,6 @@
 /// <reference path="../../.tmp/typings/tsd.d.ts" />
-import welcome from 'components/welcome/welcome';
-import menu from 'components/menu/menu';
+/// <reference path="components/welcome/welcome.ts" />
+/// <reference path="components/menu/menu.ts" />
 
 class AppController {
     constructor($router: any) {
@@ -17,8 +17,6 @@ class AppController {
 }
 
 angular.module('testing', [
-    welcome.name,
-    menu.name,
     'ngCookies',
     'ngTouch',
     'ngSanitize',
@@ -37,4 +35,5 @@ angular.module('testing', [
         $locationProvider.html5Mode(true);
     });
 
-angular.bootstrap(document, ['testing']);
+angular.element(document).ready(() =>
+    angular.bootstrap(document, ['testing']));

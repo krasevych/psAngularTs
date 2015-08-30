@@ -6,6 +6,7 @@ const renameToHtml = path => path.extname = '.html';
 
 module.exports = options =>
     gulp.task('views', () => gulp.src(`${options.src}/app/**/*.jade`)
+            .pipe($.cached('views'))
             .pipe($.consolidate('jade', {
                 basedir: options.src,
                 doctype: 'html',
@@ -14,4 +15,7 @@ module.exports = options =>
             .pipe($.rename(renameToHtml))
             .pipe(gulp.dest(`${options.tmp}/app/`))
             .pipe(browserSync.reload({stream: true}))
+            .pipe($.size({
+                title: 'html size'
+            }))
     );

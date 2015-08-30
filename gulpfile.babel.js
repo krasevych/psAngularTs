@@ -15,12 +15,11 @@ const options = {
         output: 'dist/',
         outputCss: 'dist/**/*.css'
     },
-    errorHandler: function (title) {
-        return function (err) {
-            gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
+    errorHandler: title =>
+        function (err) {
+            gutil.log(gutil.colors.red(`[${title}]`), err.toString());
             this.emit('end');
-        };
-    },
+        },
     wiredep: {
         directory: 'bower_components',
         overrides: {
@@ -33,6 +32,6 @@ const options = {
 
 wrench.readdirSyncRecursive('./gulp')
     .filter(file => (/\.(js)$/i).test(file))
-    .map(file => require('./gulp/' + file)(options));
+    .map(file => require(`./gulp/${file}`)(options));
 
 gulp.task('default', ['clean'], () => gulp.start('build'));
