@@ -1,4 +1,6 @@
-class WelcomeCtrl {
+/// <reference path="../../../../.tmp/typings/tsd.d.ts" />
+
+class HeaderCtrl {
     heading: string;
 
     constructor() {
@@ -6,4 +8,4 @@ class WelcomeCtrl {
     }
 }
 angular.module('testing')
-    .controller('WelcomeCtrl', WelcomeCtrl);
+    .controller('HeaderCtrl', HeaderCtrl);

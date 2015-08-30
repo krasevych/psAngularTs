@@ -1,6 +1,6 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
-class MenuCtrl {
+class FooterCtrl {
     heading: string;
 
     constructor() {
@@ -8,4 +8,4 @@ class MenuCtrl {
     }
 }
 angular.module('testing')
-    .controller('MenuCtrl', MenuCtrl);
+    .controller('FooterCtrl', FooterCtrl);

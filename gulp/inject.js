@@ -4,9 +4,9 @@ const gulp = require('gulp'),
 
 module.exports = options =>
     gulp.task('inject', ['scripts', 'styles'],  () => {
-        const injectStyles = gulp.src(`${options.tmp}/app/**/*.css`, {read: false});
+        const injectStyles = gulp.src(`${options.tmp}/**/*.css`, {read: false});
 
-        const injectScripts = gulp.src(`${options.tmp}/app/**/*.js`, {read: false});
+        const injectScripts = gulp.src(`${options.tmp}/**/*.js`, {read: false});
 
         const injectOptions = {
             ignorePath: [options.src, options.tmp],
