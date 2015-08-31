@@ -4,7 +4,7 @@ const gulp = require('gulp'),
     $ = require('gulp-load-plugins')();
 
 module.exports = options =>
-    gulp.task('scripts', () => {
+    gulp.task('scripts', ['tsd:install'], () => {
         mkdirp.sync(options.tmp);
 
         return gulp.src(options.ts)

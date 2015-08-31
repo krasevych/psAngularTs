@@ -1,12 +1,10 @@
 const gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
-    wiredep = require('wiredep').stream,
-    runSequence = require('run-sequence');
+    wiredep = require('wiredep').stream;
 
 
 module.exports = options =>
-    gulp.task('inject', (cb) =>
-        runSequence('tsd:install', ['scripts', 'styles'], () => {
+    gulp.task('inject', ['scripts', 'styles'], () => {
             const getInjectSrc = name => gulp.src(name, {read: false});
 
             const injectOptions = {
@@ -14,10 +12,9 @@ module.exports = options =>
                 addRootSlash: false
             };
 
-            cb();
             return gulp.src(options.indexHtml)
                 .pipe($.inject(getInjectSrc(options.css), injectOptions))
                 .pipe($.inject(getInjectSrc(options.js), injectOptions))
                 .pipe(wiredep(options.wiredep))
                 .pipe(gulp.dest(options.tmp));
-        }));
+        });
