@@ -13,15 +13,9 @@ const options = {
     jade: 'src/**/*.jade',
     less: 'src/**/*.less',
     indexHtml: 'src/*.html',
-    path: {
-        js: 'src/**/*.js',
-        html: '**/*.html',
-        json: '**/*.html',
-        templates: 'src/**/*.html',
-        less: ['src/**/*.less', '!src/assets/**/*.less'],
-        output: 'dist/',
-        outputCss: 'dist/**/*.css'
-    },
+    tmpIndexHtml: '.tmp/*.html',
+    partials: '.tmp/partials',
+    fonts: 'dist/fonts',
     errorHandler: title =>
         function (err) {
             gutil.log(gutil.colors.red(`[${title}]`), err.toString());

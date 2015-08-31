@@ -18,6 +18,7 @@ class HomeCtrl {
         });
     }
 }
+
 angular.module('testing')
     .controller('HomeCtrl', HomeCtrl)
     .config(HomeCtrl.config);

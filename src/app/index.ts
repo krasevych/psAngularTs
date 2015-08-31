@@ -1,11 +1,11 @@
 /// <reference path="../../.tmp/typings/tsd.d.ts" />
-/// <reference path="menu/menu.ts" />
 
 class AppController {
     /*@ngInject*/
     static config($locationProvider: angular.ILocationProvider,
                   $stateProvider: angular.ui.IStateProvider,
                   $urlRouterProvider: angular.ui.IUrlRouterProvider) {
+
         $locationProvider.html5Mode(true);
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.otherwise('/');

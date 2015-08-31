@@ -1,11 +1,12 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
 class HeaderCtrl {
-    heading: string;
+    header: string;
 
     constructor() {
-        this.heading = 'Welcome to The New Angular Router Demo!';
+        this.header = 'Header Component';
     }
 }
+
 angular.module('testing')
     .controller('HeaderCtrl', HeaderCtrl);

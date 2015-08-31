@@ -6,9 +6,7 @@ const $ = require('gulp-load-plugins')({
 
 module.exports = options => {
     gulp.task('partials', ['views'], () =>
-            gulp.src([
-                `${options.tmp}/**/*.html`
-            ])
+            gulp.src(options.html)
                 .pipe($.minifyHtml({
                     empty: true,
                     spare: true,
@@ -18,14 +16,14 @@ module.exports = options => {
                     module: 'testing',
                     root: ''
                 }))
-                .pipe(gulp.dest(`${options.tmp}/partials/`))
+                .pipe(gulp.dest(options.partials))
     );
 
     gulp.task('html', ['inject', 'partials'], () => {
-        const partialsInjectFile = gulp.src(`${options.tmp}/partials/templateCache.js`, {read: false});
+        const partialsInjectFile = gulp.src(`${options.partials}/templateCache.js`, {read: false});
         const partialsInjectOptions = {
             starttag: '<!-- inject:partials -->',
-            ignorePath: options.tmp + '/partials',
+            ignorePath: options.partials,
             addRootSlash: false
         };
 
@@ -35,7 +33,7 @@ module.exports = options => {
 
         let assets;
 
-        return gulp.src(`${options.tmp}/*.html`)
+        return gulp.src(options.tmpIndexHtml)
             .pipe($.inject(partialsInjectFile, partialsInjectOptions))
             .pipe(assets = $.useref.assets())
             .pipe($.rev())
@@ -57,7 +55,7 @@ module.exports = options => {
                 conditionals: true
             }))
             .pipe(htmlFilter.restore())
-            .pipe(gulp.dest(`${options.dist}/`))
+            .pipe(gulp.dest(options.dist))
             .pipe($.size({title: `${options.dist}/`, showFiles: true}));
     });
 
@@ -65,7 +63,7 @@ module.exports = options => {
             gulp.src($.mainBowerFiles())
                 .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
                 .pipe($.flatten())
-                .pipe(gulp.dest(`${options.dist}/fonts/`))
+                .pipe(gulp.dest(options.fonts))
     );
 
     gulp.task('other', () =>
@@ -74,10 +72,9 @@ module.exports = options => {
             `!${options.src}/{app,app/**,common,common/**}`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
-            .pipe(gulp.dest(`${options.dist}/`)));
+            .pipe(gulp.dest(options.dist)));
 
-    gulp.task('clean', ['tsd:purge'], done =>
-        $.del([`${options.dist}/`, `${options.tmp}/`], done));
+    gulp.task('clean', ['tsd:purge'], done => $.del([options.dist, options.tmp], done));
 
     gulp.task('build', cb =>
         runSequence('clean', ['html', 'fonts', 'other'], cb));
