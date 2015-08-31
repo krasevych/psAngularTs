@@ -1,8 +1,10 @@
 const gulp = require('gulp'),
+    wrench = require('wrench'),
     gutil = require('gulp-util'),
-    wrench = require('wrench');
+    runSequence = require('run-sequence');
 
 const options = {
+    appName: 'testing',
     src: 'src',
     dist: 'dist',
     tmp: '.tmp',
@@ -30,4 +32,4 @@ wrench.readdirSyncRecursive('./gulp')
     .filter(file => (/\.(js)$/i).test(file))
     .map(file => require(`./gulp/${file}`)(options));
 
-gulp.task('default', ['clean'], () => gulp.start('build'));
+gulp.task('default', cb => runSequence('clean', 'build', cb));

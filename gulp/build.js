@@ -1,5 +1,6 @@
 const gulp = require('gulp'),
     runSequence = require('run-sequence');
+
 const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
@@ -13,7 +14,7 @@ module.exports = options => {
                     quotes: true
                 }))
                 .pipe($.angularTemplatecache('templateCache.js', {
-                    module: 'testing',
+                    module: options.appName,
                     root: ''
                 }))
                 .pipe(gulp.dest(options.partials))
