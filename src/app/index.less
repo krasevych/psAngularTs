@@ -1,3 +1,30 @@
+@footer-height: 100px;
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.main-wrapper {
+  min-height: 100%;
+  margin-bottom: -@footer-height;
+}
+.main-wrapper:after {
+  content: "";
+  display: block;
+}
+
+body > footer, .main-wrapper:after {
+  height: @footer-height;
+}
+
+body > footer {
+  background: orange;
+}
+
 .titi {
   font-family: 'Titillium Web', sans-serif;
 }

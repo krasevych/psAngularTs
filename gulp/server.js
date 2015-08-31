@@ -15,7 +15,8 @@ module.exports = options => {
         }
 
         browserSync.instance = browserSync.init({
-            startPath: '/',
+            open: false,
+            timestamps: false,
             server: {
                 baseDir: baseDir,
                 routes: routes
