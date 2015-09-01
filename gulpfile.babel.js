@@ -18,14 +18,7 @@ const options = {
     tmpIndexHtml: '.tmp/*.html',
     partials: '.tmp/partials',
     fonts: 'dist/fonts',
-    errorHandler: title =>
-        function (err) {
-            gutil.log(gutil.colors.red(`[${title}]`), err.toString());
-            this.emit('end');
-        },
-    wiredep: {
-        directory: 'bower_components'
-    }
+    wiredep: {directory: 'bower_components'}
 };
 
 wrench.readdirSyncRecursive('./gulp')

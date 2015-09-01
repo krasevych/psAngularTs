@@ -5,18 +5,12 @@ const gulp = require('gulp'),
 module.exports = options =>
     gulp.task('styles', () =>
         gulp.src(options.less)
+            .pipe($.plumber())
             .pipe($.cached('styles'))
             .pipe($.sourcemaps.init())
-            .pipe($.less({
-                options: [
-                    'bower_components',
-                    options.src
-                ]
-            })).on('error', options.errorHandler('Less'))
-            .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
+            .pipe($.less())
             .pipe($.sourcemaps.write())
-            .pipe(gulp.dest(`${options.tmp}/`))
+            .pipe($.autoprefixer())
+            .pipe(gulp.dest(options.tmp))
             .pipe(browserSync.reload({stream: true}))
-            .pipe($.size({
-                title: 'css size'
-            })));
+            .pipe($.size({title: 'styles'})));

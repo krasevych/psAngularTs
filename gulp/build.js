@@ -35,12 +35,13 @@ module.exports = options => {
         let assets;
 
         return gulp.src(options.tmpIndexHtml)
+            .pipe($.plumber())
             .pipe($.inject(partialsInjectFile, partialsInjectOptions))
             .pipe(assets = $.useref.assets())
             .pipe($.rev())
             .pipe(jsFilter)
             .pipe($.ngAnnotate())
-            .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', options.errorHandler('Uglify'))
+            .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
             .pipe($.csso())
