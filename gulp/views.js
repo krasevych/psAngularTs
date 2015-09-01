@@ -16,7 +16,5 @@ module.exports = options =>
             .pipe($.rename(renameToHtml))
             .pipe(gulp.dest(`${options.tmp}/`))
             .pipe(browserSync.reload({stream: true}))
-            .pipe($.size({
-                title: 'html size'
-            }))
+            .pipe($.size({title: 'html'}))
     );
