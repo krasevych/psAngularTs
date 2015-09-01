@@ -8,6 +8,19 @@ html, body {
   height: 100%;
 }
 
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    line-height: 0;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 .main-wrapper {
   min-height: 100%;
   margin-bottom: -@footer-height;
