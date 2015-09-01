@@ -21,7 +21,7 @@ module.exports = options =>
         const injectOptions = {
             transform: filePath => {
                 filePath = filePath.replace(`${options.src}/app/`, '');
-                return `@import '${filePath}';`;
+                return `@import (reference) '${filePath}';`;
             },
             starttag: '// injector',
             endtag: '// endinjector',
@@ -35,12 +35,8 @@ module.exports = options =>
             `${options.src}/app/index.less`,
             `${options.src}/app/vendor.less`
         ])
-            .pipe(indexFilter)
             .pipe($.inject(injectFiles, injectOptions))
-            .pipe(indexFilter.restore())
-            .pipe(vendorFilter)
             .pipe(wiredep(options.wiredep))
-            .pipe(vendorFilter.restore())
             .pipe($.sourcemaps.init())
             .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
             .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
