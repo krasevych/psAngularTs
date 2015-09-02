@@ -1,4 +1,37 @@
+@import (reference) "../../../app/index";
+
 #footer {
-  display: block;
-  background: #23807e;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 100%;
+  line-height: @footer-height;
+
+  font-size: 12px;
+  color: #fff;
+  background: @bg-blue;
+
+  .copyright {
+    color: @text-dark-white;
+    font-weight: 300;
+  }
+
+  .privacy-policy-link {
+    display: inline-block;
+    margin-left: 10px;
+    padding-left: 10px;
+    line-height: 14px;
+
+    border-left: 2px solid @border-gray;
+    text-transform: capitalize;
+  }
+
+  nav {
+    line-height: 65px;
+    a {
+      padding-left: 15px;
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
 }

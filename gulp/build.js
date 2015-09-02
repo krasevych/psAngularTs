@@ -35,7 +35,7 @@ module.exports = options => {
         let assets;
 
         return gulp.src(options.tmpIndexHtml)
-            .pipe($.plumber())
+            .pipe($.plumber(options.plumberHandler))
             .pipe($.inject(partialsInjectFile, partialsInjectOptions))
             .pipe(assets = $.useref.assets())
             .pipe($.rev())

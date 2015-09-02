@@ -8,7 +8,7 @@ module.exports = options =>
         mkdirp.sync(options.tmp);
 
         return gulp.src(options.ts)
-            .pipe($.plumber())
+            .pipe($.plumber(options.plumberHandler))
             .pipe($.cached('scripts'))
             .pipe($.sourcemaps.init())
             .pipe($.tslint())

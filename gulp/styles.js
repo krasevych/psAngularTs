@@ -5,7 +5,7 @@ const gulp = require('gulp'),
 module.exports = options =>
     gulp.task('styles', () =>
         gulp.src(options.less)
-            .pipe($.plumber())
+            .pipe($.plumber(options.plumberHandler))
             .pipe($.cached('styles'))
             .pipe($.sourcemaps.init())
             .pipe($.less())

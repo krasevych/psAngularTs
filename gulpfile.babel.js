@@ -18,7 +18,13 @@ const options = {
     tmpIndexHtml: '.tmp/*.html',
     partials: '.tmp/partials',
     fonts: 'dist/fonts',
-    wiredep: {directory: 'bower_components'}
+    wiredep: {directory: 'bower_components'},
+    plumberHandler: {
+        errorHandler: function (err) {
+            gutil.log(gutil.colors.red(`Error: [${err.plugin}]`), err.message);
+            this.emit('end');
+        }
+    }
 };
 
 wrench.readdirSyncRecursive('./gulp')

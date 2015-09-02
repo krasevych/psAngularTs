@@ -4,6 +4,7 @@ class AppController {
     /*@ngInject*/
     static config($locationProvider: angular.ILocationProvider,
                   $stateProvider: angular.ui.IStateProvider,
+                  $mdIconProvider: angular.material.IIconProvider,
                   $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
         $locationProvider.html5Mode(true);
@@ -26,6 +27,8 @@ class AppController {
                     }
                 }
             });
+        $mdIconProvider.iconSet('fb', 'assets/images/icons/github.svg', 48)
+            .defaultIconSet('/icons/github.svg', 24);
     }
 }
 
