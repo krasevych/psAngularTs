@@ -1,21 +1,23 @@
 const gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
-    wiredep = require('wiredep').stream;
+    browserSync = require('browser-sync'),
+    wiredep = require('wiredep').stream,
+    runSequence = require('run-sequence');
+
 
 module.exports = options =>
-    gulp.task('inject', ['scripts', 'styles'],  () => {
-        const injectStyles = gulp.src(`${options.tmp}/app/**/*.css`, {read: false});
+    gulp.task('inject', (cb) =>
+        runSequence('tsd:install', ['scripts', 'styles'], () => {
+            const getInjectSrc = name => gulp.src(name, {read: false});
+            const injectOptions = {
+                ignorePath: [options.src, options.tmp],
+                addRootSlash: false
+            };
 
-        const injectScripts = gulp.src(`${options.tmp}/app/**/*.js`, {read: false});
-
-        const injectOptions = {
-            ignorePath: [options.src, options.tmp],
-            addRootSlash: false
-        };
-
-        return gulp.src(`${options.src}/*.html`)
-            .pipe($.inject(injectStyles, injectOptions))
-            .pipe($.inject(injectScripts, injectOptions))
-            .pipe(wiredep(options.wiredep))
-            .pipe(gulp.dest(options.tmp));
-    });
+            gulp.src(options.indexHtml)
+                .pipe($.inject(getInjectSrc(options.css), injectOptions))
+                .pipe($.inject(getInjectSrc(options.js), injectOptions))
+                .pipe(wiredep(options.wiredep))
+                .pipe(gulp.dest(options.tmp)).on('end', cb)
+                .pipe(browserSync.reload({stream: true}));
+        }));

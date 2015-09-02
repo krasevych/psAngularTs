@@ -1,31 +1,28 @@
 const gulp = require('gulp'),
+    wrench = require('wrench'),
     gutil = require('gulp-util'),
-    wrench = require('wrench');
+    runSequence = require('run-sequence');
 
 const options = {
+    appName: 'testing',
     src: 'src',
     dist: 'dist',
     tmp: '.tmp',
-    path: {
-        js: 'src/**/*.js',
-        html: '**/*.html',
-        json: '**/*.html',
-        templates: 'src/**/*.html',
-        less: ['src/**/*.less', '!src/assets/**/*.less'],
-        output: 'dist/',
-        outputCss: 'dist/**/*.css'
-    },
-    errorHandler: title =>
-        function (err) {
-            gutil.log(gutil.colors.red(`[${title}]`), err.toString());
+    js: '.tmp/**/*.js',
+    html: '.tmp/**/*.html',
+    css: '.tmp/**/*.css',
+    ts: 'src/**/*.ts',
+    jade: 'src/**/*.jade',
+    less: 'src/**/*.less',
+    indexHtml: 'src/*.html',
+    tmpIndexHtml: '.tmp/*.html',
+    partials: '.tmp/partials',
+    fonts: 'dist/fonts',
+    wiredep: {directory: 'bower_components'},
+    plumberHandler: {
+        errorHandler: function (err) {
+            gutil.log(gutil.colors.red(`Error: [${err.plugin}]`), err.message);
             this.emit('end');
-        },
-    wiredep: {
-        directory: 'bower_components',
-        overrides: {
-            'angular-new-router': {
-                'main': 'dist/router.es5.js'
-            }
         }
     }
 };
@@ -34,4 +31,4 @@ wrench.readdirSyncRecursive('./gulp')
     .filter(file => (/\.(js)$/i).test(file))
     .map(file => require(`./gulp/${file}`)(options));
 
-gulp.task('default', ['clean'], () => gulp.start('build'));
+gulp.task('default', cb => runSequence('clean', 'build', cb));

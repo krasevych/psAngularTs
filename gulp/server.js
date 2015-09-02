@@ -6,9 +6,7 @@ const gulp = require('gulp'),
 
 module.exports = options => {
 
-    const browserSyncInit = (baseDir, browser) => {
-        browser = browser === undefined ? 'default' : browser;
-
+    const browserSyncInit = baseDir => {
         let routes = null;
         if (baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
             routes = {
@@ -16,27 +14,24 @@ module.exports = options => {
             };
         }
 
-        const server = {
-            baseDir: baseDir,
-            routes: routes
-        };
-
         browserSync.instance = browserSync.init({
-            startPath: '/',
-            server: server,
-            browser: browser
+            open: false,
+            timestamps: false,
+            server: {
+                baseDir: baseDir,
+                routes: routes
+            }
         });
     };
 
     browserSync.use(browserSyncSpa({selector: '[ng-app]'}));
 
-    //gulp.task('serve', ['watch'], () => browserSyncInit([options.tmp, options.src]));
     gulp.task('serve', () =>
         runSequence('clean', 'watch', () => browserSyncInit([options.tmp, options.src])));
 
     gulp.task('serve:dist', ['build'], () => browserSyncInit(options.dist));
 
-    gulp.task('serve:e2e', ['inject'], () => browserSyncInit([options.tmp, options.src], []));
+    gulp.task('serve:e2e', ['inject'], () => browserSyncInit([options.tmp, options.src]));
 
-    gulp.task('serve:e2e-dist', ['build'], () => browserSyncInit(options.dist, []));
+    gulp.task('serve:e2e-dist', ['build'], () => browserSyncInit(options.dist));
 };

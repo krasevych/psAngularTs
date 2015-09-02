@@ -1,18 +1,34 @@
 /// <reference path="../../.tmp/typings/tsd.d.ts" />
-/// <reference path="components/welcome/welcome.ts" />
-/// <reference path="components/menu/menu.ts" />
 
 class AppController {
-    constructor($router: any) {
-        $router.config([
-            {
-                path: '/welcome',
-                component: {
-                    left: 'menu',
-                    right: 'welcome'
+    /*@ngInject*/
+    static config($locationProvider: angular.ILocationProvider,
+                  $stateProvider: angular.ui.IStateProvider,
+                  $mdIconProvider: angular.material.IIconProvider,
+                  $urlRouterProvider: angular.ui.IUrlRouterProvider) {
+
+        $locationProvider.html5Mode(true);
+        $urlRouterProvider.when('', '/');
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+            .state('root', {
+                abstract: true,
+                url: '',
+                views: {
+                    header: {
+                        templateUrl: 'common/components/header/header.html',
+                        controller: 'HeaderCtrl'
+                    },
+                    main: {
+                        template: '<div ui-view></div>'
+                    },
+                    footer: {
+                        templateUrl: 'common/components/footer/footer.html'
+                    }
                 }
-            }
-        ]);
+            });
+        $mdIconProvider.iconSet('fb', 'assets/images/icons/github.svg', 48)
+            .defaultIconSet('/icons/github.svg', 24);
     }
 }
 
@@ -20,20 +36,11 @@ angular.module('testing', [
     'ngCookies',
     'ngTouch',
     'ngSanitize',
-    'ngNewRouter',
+    'ui.router',
     'ngMaterial'
 ])
     .controller('AppController', AppController)
-    .config(($componentLoaderProvider: any,
-             $locationProvider: any) => {
-        $componentLoaderProvider.setTemplateMapping((name: string) =>
-            `app/components/${name}/${name}.html`);
-
-        $componentLoaderProvider.setCtrlNameMapping((name: string) =>
-            `${name[0].toUpperCase()}${name.substr(1)}Ctrl`);
-
-        $locationProvider.html5Mode(true);
-    });
+    .config(AppController.config);
 
 angular.element(document).ready(() =>
     angular.bootstrap(document, ['testing']));

@@ -1,32 +1,30 @@
 const gulp = require('gulp'),
     runSequence = require('run-sequence');
+
 const $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
 module.exports = options => {
     gulp.task('partials', ['views'], () =>
-            gulp.src([
-                `${options.src}/app/**/*.html`,
-                `${options.tmp}/app/**/*.html`
-            ])
+            gulp.src(options.html)
                 .pipe($.minifyHtml({
                     empty: true,
                     spare: true,
                     quotes: true
                 }))
                 .pipe($.angularTemplatecache('templateCache.js', {
-                    module: 'testing',
-                    root: 'app'
+                    module: options.appName,
+                    root: ''
                 }))
-                .pipe(gulp.dest(`${options.tmp}/partials/`))
+                .pipe(gulp.dest(options.partials))
     );
 
     gulp.task('html', ['inject', 'partials'], () => {
-        const partialsInjectFile = gulp.src(`${options.tmp}/partials/templateCache.js`, {read: false});
+        const partialsInjectFile = gulp.src(`${options.partials}/templateCache.js`, {read: false});
         const partialsInjectOptions = {
             starttag: '<!-- inject:partials -->',
-            ignorePath: options.tmp + '/partials',
+            ignorePath: options.partials,
             addRootSlash: false
         };
 
@@ -36,17 +34,14 @@ module.exports = options => {
 
         let assets;
 
-        return gulp.src(`${options.tmp}/*.html`)
+        return gulp.src(options.tmpIndexHtml)
+            .pipe($.plumber(options.plumberHandler))
             .pipe($.inject(partialsInjectFile, partialsInjectOptions))
             .pipe(assets = $.useref.assets())
             .pipe($.rev())
             .pipe(jsFilter)
-            .pipe($.ngAnnotate({
-                add: true,
-                remove: true,
-                regexp: /^[a-zA-Z0-9_\$\.\s\]\[\']+$/
-            }))
-            .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', options.errorHandler('Uglify'))
+            .pipe($.ngAnnotate())
+            .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
             .pipe(jsFilter.restore())
             .pipe(cssFilter)
             .pipe($.csso())
@@ -62,7 +57,7 @@ module.exports = options => {
                 conditionals: true
             }))
             .pipe(htmlFilter.restore())
-            .pipe(gulp.dest(`${options.dist}/`))
+            .pipe(gulp.dest(options.dist))
             .pipe($.size({title: `${options.dist}/`, showFiles: true}));
     });
 
@@ -70,19 +65,18 @@ module.exports = options => {
             gulp.src($.mainBowerFiles())
                 .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
                 .pipe($.flatten())
-                .pipe(gulp.dest(`${options.dist}/fonts/`))
+                .pipe(gulp.dest(options.fonts))
     );
 
     gulp.task('other', () =>
         gulp.src([
             `${options.src}/**/*`,
-            `!${options.src}/{app,app/**}`,
+            `!${options.src}/{app,app/**,common,common/**}`,
             `!${options.src}/**/*.{html,css,js,less,ts,jade}`
         ])
-            .pipe(gulp.dest(`${options.dist}/`)));
+            .pipe(gulp.dest(options.dist)));
 
-    gulp.task('clean', ['tsd:purge'], done =>
-        $.del([`${options.dist}/`, `${options.tmp}/`], done));
+    gulp.task('clean', ['tsd:purge'], done => $.del([options.dist, options.tmp], done));
 
     gulp.task('build', cb =>
         runSequence('clean', ['html', 'fonts', 'other'], cb));

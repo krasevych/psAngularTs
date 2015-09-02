@@ -1,14 +1,82 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+@footer-height: 50px;
+@bg-blue: #191c42;
+@text-dark-white: #ddd;
+@border-gray: #36374c;
+@link: #09c;
+
+.font-roboto {
+  font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
 }
 
-.thumbnail {
-  height: 200px;
+* {
+  margin: 0;
+}
 
-  img.pull-right {
-    width: 10px;
+html, body {
+  height: 100%;
+  .font-roboto;
+}
+
+a {
+  color: @link;
+  transition: color .2s ease-out;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover, &.active {
+    text-decoration: underline;
+  }
+}
+
+[ui-sref] {
+  cursor: pointer;
+}
+
+[layout-padding] {
+padding: 30px;
+}
+
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    line-height: 0;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.main-wrapper {
+  min-height: 100%;
+  margin-bottom: -@footer-height;
+}
+.main-wrapper:after {
+  content: "";
+  display: block;
+}
+
+body > footer, .main-wrapper:after {
+  height: @footer-height;
+}
+
+
+.titi {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.body-font {
+  .font-roboto;
+  line-height: 20px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #2e2f44;
+
+  a {
+    color: #0099cc;
+    text-decoration: none;
+    transition: color 0.2s ease-out;
   }
 }

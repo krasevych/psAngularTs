@@ -10,8 +10,7 @@ module.exports = () => {
         const bower = require(path.join(process.cwd(), 'bower.json'));
 
         const dependencies = [].concat(
-            Object.keys(bower.dependencies),
-            Object.keys(bower.devDependencies)
+            Object.keys(bower.dependencies)
         );
 
         const query = new tsd.Query();
