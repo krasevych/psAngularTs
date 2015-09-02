@@ -17,7 +17,8 @@ class AppController {
                 views: {
                     header: {
                         templateUrl: 'common/components/header/header.html',
-                        controller: 'HeaderCtrl'
+                        controller: 'HeaderCtrl',
+                        controllerAs: 'HeaderCtrl'
                     },
                     main: {
                         template: '<div ui-view></div>'
@@ -28,9 +29,7 @@ class AppController {
                 }
             });
         $mdThemingProvider.theme('default')
-            .primaryPalette('blue')
-            .accentPalette('teal')
-            .backgroundPalette('blue');
+            .primaryPalette('blue');
     }
 }
 
