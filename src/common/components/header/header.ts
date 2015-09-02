@@ -9,7 +9,7 @@ class HeaderCtrl {
 
     openLoginModal(ev: any) {
         this.modal.show({
-            template: '<div>hello</div>',
+            template: '<md-dialog>hello</md-dialog>',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true
