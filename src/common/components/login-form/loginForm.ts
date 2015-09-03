@@ -4,12 +4,17 @@
 class LoginFormCtrl {
     public userData: loginForm.IUserData;
 
-    constructor() {
+    canShowError(form: angular.IFormController, fieldName: string) {
+        return form.$invalid && (form.$submitted || form[fieldName].$touched);
+    }
+
+    submit() {
+        alert('submitted!!!')
     }
 }
 
 angular.module('testing')
-    .directive('loginForm', (): angular.IDirective => ({
+    .directive('loginForm', () => ({
         controller: LoginFormCtrl,
         controllerAs: 'LoginFormCtrl',
         scope: {},

@@ -1,6 +1,6 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
-class loginModalCtrl {
+class LoginModalCtrl {
     public modal: angular.material.IDialogService;
 
     constructor($element: JQuery, $mdDialog: angular.material.IDialogService) {
@@ -20,8 +20,8 @@ class loginModalCtrl {
 
 angular.module('testing')
     .directive('loginModal', (): angular.IDirective => ({
-        controller: loginModalCtrl,
-        controllerAs: 'loginModalCtrl',
+        controller: LoginModalCtrl,
+        controllerAs: 'LoginModalCtrl',
         scope: {},
         templateUrl: 'common/components/login-form/loginForm.html'
 

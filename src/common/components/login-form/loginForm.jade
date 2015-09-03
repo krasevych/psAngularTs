@@ -2,12 +2,12 @@ md-content#login-form(layout-padding)
     form(name="loginForm")
         md-input-container
             label Email or Username
-            input(required
+            input(required focus-on
             name="name"
-            ng-model="loginFormCtrl.userData.name"
-            autocomplete="off"
+            ng-model="LoginFormCtrl.userData.name"
             )
-            div(ng-messages="loginForm.name.$error")
+            div(ng-messages="loginForm.name.$error"
+            ng-if="LoginFormCtrl.canShowError(loginForm, 'name')")
                 div(ng-message="required") Email is required
 
         md-input-container
@@ -15,11 +15,12 @@ md-content#login-form(layout-padding)
             input(required
             type="password"
             name="password"
-            ng-model="loginFormCtrl.userData.password"
+            ng-model="LoginFormCtrl.userData.password"
             ng-minlength="6"
             )
-            div(ng-messages="loginForm.password.$error")
+            div(ng-messages="loginForm.password.$error"
+            ng-if="LoginFormCtrl.canShowError(loginForm,'password')")
                 div(ng-message="required") Password is required
                 div(ng-message="minlength") Minimum password length is 6
 
-    md-button.md-primary.md-raised() sign in
+    md-button.md-primary.md-raised(ng-click="loginForm.$invalid || LoginFormCtrl.submit()") sign in
