@@ -12,8 +12,8 @@ class HeaderCtrl {
             template: '<md-dialog>hello</md-dialog>',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true
-        })
+            clickOutsideToClose: true
+        });
     }
 }
 
