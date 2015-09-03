@@ -1,7 +1,28 @@
+@import (reference) "../../../app/_mixins";
+
 #header {
-  display: block;
-  background: #363c80;
+  background: linear-gradient(to bottom,@bg-blue 0,#3f1e44 100%);
+
+  .logo {
+    line-height: 0px;
+  }
+
   a {
+    vertical-align: middle;
     color: #fff;
+  }
+
+  md-toolbar {
+    background: transparent;
+  }
+
+  .md-toolbar-tools {
+    padding: 0;
+  }
+
+  .md-button.md-primary {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
   }
 }

@@ -1,12 +1,4 @@
-@footer-height: 50px;
-@bg-blue: #191c42;
-@text-dark-white: #ddd;
-@border-gray: #36374c;
-@link: #09c;
-
-.font-roboto {
-  font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
-}
+@import (reference) "_mixins";
 
 * {
   margin: 0;
@@ -33,7 +25,7 @@ a {
 }
 
 [layout-padding] {
-padding: 30px;
+  padding: 0 30px;
 }
 
 .clearfix {
@@ -53,6 +45,7 @@ padding: 30px;
   min-height: 100%;
   margin-bottom: -@footer-height;
 }
+
 .main-wrapper:after {
   content: "";
   display: block;
@@ -62,6 +55,12 @@ body > footer, .main-wrapper:after {
   height: @footer-height;
 }
 
+ul.h-list {
+  list-style: none;
+  li {
+    display: inline-block;
+  }
+}
 
 .titi {
   font-family: 'Titillium Web', sans-serif;

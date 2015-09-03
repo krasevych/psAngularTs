@@ -1,10 +1,19 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
 class HeaderCtrl {
-    header: string;
+    modal: angular.material.IDialogService;
 
-    constructor() {
-        this.header = 'Header Component';
+    constructor($mdDialog: angular.material.IDialogService) {
+        this.modal = $mdDialog;
+    }
+
+    openLoginModal(ev: any) {
+        this.modal.show({
+            template: '<md-dialog>hello</md-dialog>',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true
+        });
     }
 }
 

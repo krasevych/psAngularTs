@@ -4,7 +4,7 @@ class AppController {
     /*@ngInject*/
     static config($locationProvider: angular.ILocationProvider,
                   $stateProvider: angular.ui.IStateProvider,
-                  $mdIconProvider: angular.material.IIconProvider,
+                  $mdThemingProvider: angular.material.IThemingProvider,
                   $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
         $locationProvider.html5Mode(true);
@@ -17,7 +17,8 @@ class AppController {
                 views: {
                     header: {
                         templateUrl: 'common/components/header/header.html',
-                        controller: 'HeaderCtrl'
+                        controller: 'HeaderCtrl',
+                        controllerAs: 'HeaderCtrl'
                     },
                     main: {
                         template: '<div ui-view></div>'
@@ -27,8 +28,8 @@ class AppController {
                     }
                 }
             });
-        $mdIconProvider.iconSet('fb', 'assets/images/icons/github.svg', 48)
-            .defaultIconSet('/icons/github.svg', 24);
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue');
     }
 }
 
