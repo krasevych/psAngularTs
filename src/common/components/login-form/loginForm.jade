@@ -1,0 +1,25 @@
+md-content#login-form(layout-padding)
+    form(name="loginForm")
+        md-input-container
+            label Email or Username
+            input(required
+            name="name"
+            ng-model="loginFormCtrl.userData.name"
+            autocomplete="off"
+            )
+            div(ng-messages="loginForm.name.$error")
+                div(ng-message="required") Email is required
+
+        md-input-container
+            label Password
+            input(required
+            type="password"
+            name="password"
+            ng-model="loginFormCtrl.userData.password"
+            ng-minlength="6"
+            )
+            div(ng-messages="loginForm.password.$error")
+                div(ng-message="required") Password is required
+                div(ng-message="minlength") Minimum password length is 6
+
+    md-button.md-primary.md-raised() sign in

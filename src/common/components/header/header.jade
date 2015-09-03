@@ -5,5 +5,5 @@ section#header(layout-padding)
                 a(ui-sref="home")
                     md-icon(md-svg-src="assets/images/icons/github.svg")
             nav(flex ng-include="'common/components/header/header-nav.html'")
-            md-button.md-primary(ng-click="HeaderCtrl.openLoginModal($event)") login
+            md-button.md-primary(ui-sref="login") login
             md-button.md-primary sign up
