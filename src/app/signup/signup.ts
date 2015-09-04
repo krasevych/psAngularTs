@@ -1,14 +1,14 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
 
 class SignupCtrl {
-    heading: string;
+    public heading: string;
 
     constructor() {
         this.heading = 'Sign Up Page';
     }
 
     /*@ngInject*/
-    static config($stateProvider: any) {
+    static config($stateProvider: angular.ui.IStateProvider) {
         $stateProvider.state('signup', {
             parent: 'root',
             url: '/signup',

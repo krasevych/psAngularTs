@@ -1,15 +1,15 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
 class LoginModalCtrl {
-    public modal: angular.material.IDialogService;
-
-    constructor($element: JQuery, $mdDialog: angular.material.IDialogService) {
-        this.modal = $mdDialog;
+    constructor(
+        private $element: JQuery,
+        private $mdDialog: angular.material.IDialogService
+    ) {
         $element.on('click', this.openLoginModal.bind(this));
     }
 
     openLoginModal(ev: any) {
-        this.modal.show({
+        this.$mdDialog.show({
             templateUrl: 'common/components/login-modal/loginModal.html',
             parent: angular.element(document.body),
             targetEvent: ev,

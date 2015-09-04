@@ -1,14 +1,14 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
 
 class HomeCtrl {
-    heading: string;
+    public heading: string;
 
     constructor() {
         this.heading = 'Home Page';
     }
 
     /*@ngInject*/
-    static config($stateProvider: any) {
+    static config($stateProvider: angular.ui.IStateProvider) {
         $stateProvider.state('home', {
             parent: 'root',
             url: '/',

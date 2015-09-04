@@ -2,7 +2,7 @@
 
 class LoginCtrl {
     /*@ngInject*/
-    static config($stateProvider: any) {
+    static config($stateProvider: angular.ui.IStateProvider) {
         $stateProvider.state('login', {
             parent: 'root',
             url: '/login',

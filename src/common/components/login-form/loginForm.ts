@@ -1,15 +1,21 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 /// <reference path="loginForm.d.ts" />
+/// <reference path="../../services/http.ts" />
 
 class LoginFormCtrl {
     public userData: loginForm.IUserData;
 
-    canShowError(form: angular.IFormController, fieldName: string) {
+    constructor(private SecureHttpSvc: any) {
+        console.log(SecureHttpSvc.get('/test'));
+    }
+
+    canShowError(form: angular.IFormController,
+                 fieldName: string) {
         return form.$invalid && (form.$submitted || form[fieldName].$touched);
     }
 
     submit() {
-        alert('submitted!!!')
+        alert('submitted!!!');
     }
 }
 
