@@ -1,12 +1,14 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 /// <reference path="loginForm.d.ts" />
-/// <reference path="../../services/http.ts" />
+/// <reference path="../../services/http.d.ts" />
 
 class LoginFormCtrl {
-    public userData: loginForm.IUserData;
+    public userData: ILoginUserData;
 
-    constructor(private SecureHttpSvc: any) {
-        console.log(SecureHttpSvc.get('/test'));
+    constructor(private HttpSvc: IHttpSvc) {
+        console.log(HttpSvc);
+        console.log(HttpSvc.get('/test'));
+        console.log(HttpSvc.secureGet('/secure'));
     }
 
     canShowError(form: angular.IFormController,
@@ -15,6 +17,7 @@ class LoginFormCtrl {
     }
 
     submit() {
+
         alert('submitted!!!');
     }
 }
