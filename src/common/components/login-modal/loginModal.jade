@@ -1,28 +1,9 @@
-md-content#login-modal(layout-padding)
-    form(name="projectForm")
-        md-input-container
-            label Description
-            input(md-maxlength="30", required, name="description", ng-model="project.description")
-            div(ng-messages="projectForm.description.$error")
-                div(ng-message="required") This is required.
-                div(ng-message="md-maxlength") The name has to be less than 30 characters long.
+md-dialog#login-modal(aria-label='login')
+    md-toolbar
+        .md-toolbar-tools
+            h2 Login
+            span(flex='')
+            md-button.md-icon-button(ng-click='$mdDialog.hide()') x
 
-        md-input-container
-            label Client Name
-            input(required, name="clientName", ng-model="project.clientName")
-            div(ng-messages="projectForm.clientName.$error")
-                div(ng-message="required") This is required.
-
-        md-input-container
-            label Hourly Rate (USD)
-            input(required, type="number", step="any", name="rate", ng-model="project.rate", min="800", max="4999")
-            div(ng-messages="projectForm.rate.$error")
-                div(ng-message="required")
-                    | You've got to charge something! You can't just
-                    b give away
-                    |  a Missile Defense System.
-                div(ng-message="min")
-                    | You should charge at least $800 an hour. This job is a big deal... if you mess up, everyone dies!
-                div(ng-message="max")
-                    | $5,000 an hour? That's a little ridiculous. I doubt event Bill Clinton could afford that.
-
+    md-dialog-content
+        login-form

@@ -2,13 +2,10 @@
 /// <reference path="http.d.ts" />
 
 class AuthSvc {
-
-    constructor(private HttpSvc: IHttpSvc) {
-
-    }
+    constructor(private HttpSvc: IHttpSvc) {}
 
     login(username: string, password: string) {
-        this.HttpSvc.post('/')
+        return this.HttpSvc.post('login', {username, password});
     }
 }
 

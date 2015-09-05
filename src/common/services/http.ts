@@ -1,17 +1,13 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
 
 class HttpSvc {
-    public url: string = '';
-    private methods: string[];
-    private methodsHasData: string[];
-    private headers: any;
-    private secureHeaders: any;
+    public domain: string = 'https://test';
+    public headers: any = {'header': 'qwerty'};
+    private methods: string[] = ['get', 'post', 'put', 'delete'];
+    private methodsHasData: string[] = ['post', 'put'];
+    private secureHeaders: any = {'secure-header': 'qwerty'};
 
     constructor(private $http: angular.IHttpService) {
-        this.methods = ['get', 'post', 'put'];
-        this.methodsHasData = ['post', 'put'];
-        this.headers = {'header': 'qwerty'};
-        this.secureHeaders = {'secure-header': 'qwerty'};
         this.createMethods();
         this.createSecureMethods();
     }
@@ -35,7 +31,7 @@ class HttpSvc {
         this.methods.forEach((method: string) => {
             this[method] = (url: string, ...params: any[]) => {
                 params = this.setHeaders(method, this.headers, params);
-                return this.$http[method](url, ...params);
+                return this.$http[method](`${this.domain}/${url}`, ...params);
             };
         });
     }
