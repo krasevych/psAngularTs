@@ -1,7 +1,7 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
 
 class HttpSvc {
-    public domain: string = 'https://test';
+    public domain: string = 'test';
     public headers: any = {'header': 'qwerty'};
     private methods: string[] = ['get', 'post', 'put', 'delete'];
     private methodsHasData: string[] = ['post', 'put'];
