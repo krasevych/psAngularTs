@@ -38,6 +38,7 @@ angular.module('testing', [
     'ngTouch',
     'ngSanitize',
     'ui.router',
+    'ngMessages',
     'ngMaterial'
 ])
     .controller('AppController', AppController)

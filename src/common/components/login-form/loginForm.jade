@@ -1,0 +1,25 @@
+md-content#login-form(layout-padding)
+    form(novalidate name='loginForm')
+        md-input-container
+            label Email or Username
+            input(required
+            name='name'
+            ng-model='username')
+            div(ng-messages='loginForm.name.$error'
+            ng-if="LoginFormCtrl.canShowError(loginForm, 'name')")
+                div(ng-message='required') Email is required
+
+        md-input-container
+            label Password
+            input(required
+            type='password'
+            name='password'
+            ng-model='password'
+            ng-minlength='6')
+            div(ng-messages='loginForm.password.$error'
+            ng-if="LoginFormCtrl.canShowError(loginForm,'password')")
+                div(ng-message='required') Password is required
+                div(ng-message='minlength') Minimum password length is 6
+
+        md-button.md-primary.md-raised(type='submit'
+        ng-click='loginForm.$invalid || LoginFormCtrl.submit(username, password)') sign in

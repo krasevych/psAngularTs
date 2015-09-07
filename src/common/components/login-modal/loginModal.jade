@@ -1,0 +1,9 @@
+md-dialog#login-modal(aria-label='login')
+    md-toolbar
+        .md-toolbar-tools
+            h2 Login
+            span(flex='')
+            md-button.md-icon-button(ng-click='$mdDialog.hide()') x
+
+    md-dialog-content
+        login-form

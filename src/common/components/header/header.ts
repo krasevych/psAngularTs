@@ -1,19 +1,16 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 
 class HeaderCtrl {
-    modal: angular.material.IDialogService;
+    public isShowLoginBtn: boolean = true;
 
-    constructor($mdDialog: angular.material.IDialogService) {
-        this.modal = $mdDialog;
+    constructor(private $state: angular.ui.IStateService,
+                private $rootScope: angular.IRootScopeService) {
+        this.canShowLoginBtn();
+        $rootScope.$on('$stateChangeSuccess', () => this.canShowLoginBtn());
     }
 
-    openLoginModal(ev: any) {
-        this.modal.show({
-            template: '<md-dialog>hello</md-dialog>',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true
-        });
+    canShowLoginBtn() {
+        return this.isShowLoginBtn = this.$state.current.name !== 'login';
     }
 }
 
