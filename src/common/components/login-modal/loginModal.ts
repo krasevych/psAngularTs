@@ -2,6 +2,7 @@
 /// <reference path="loginModal.d.ts" />
 
 class ModalCtrl {
+    /*@ngInject*/
     constructor(public $scope: IScopeModalCtrl,
                 private $mdDialog: angular.material.IDialogService) {
         $scope.$mdDialog = $mdDialog;

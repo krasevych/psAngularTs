@@ -4,7 +4,7 @@
   "dependencies": {
     "underscore": "~1.7.0",
     "angular": "~1.4.1",
-    "angular-cookies": "~1.4.1",
+    "angular-cookie": "~4.0.9",
     "angular-touch": "~1.4.1",
     "angular-sanitize": "~1.4.1",
     "angular-ui-router": "~0.2.15",

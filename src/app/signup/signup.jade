@@ -1,2 +1,41 @@
-section#signup
-    h2 {{SignupCtrl.heading}}
+md-content#signup(layout-padding layout='column' layout-align='center center')
+    h1 sign up
+    .description Write your username or email and password then click on sign up
+    form(novalidate name='signupForm')
+        md-input-container
+            label Email
+            input(required
+            name='name'
+            ng-model='username')
+            div(ng-messages='signupForm.name.$error'
+            ng-if="SignupCtrl.canShowError(signupForm, 'name')")
+                div(ng-message='required') Email is required
+
+        md-input-container
+            label Password
+            input(required
+            type='password'
+            name='password'
+            ng-model='password'
+            ng-minlength='6')
+            div(ng-messages='signupForm.password.$error'
+            ng-if="SignupCtrl.canShowError(signupForm,'password')")
+                div(ng-message='required') Password is required
+                div(ng-message='minlength') Minimum password length is 6
+
+        md-input-container
+            label Confirm Password
+            input(required
+            type='password'
+            name='confirmPassword'
+            ng-model='confirmPassword'
+            match='password'
+            ng-minlength='6')
+            div(ng-messages='signupForm.confirmPassword.$error'
+            ng-if="SignupCtrl.canShowError(signupForm,'confirmPassword')")
+                div(ng-message='required') Confirm Password is required
+                div(ng-message='minlength') Minimum password length is 6
+                div(ng-message='match') Fields do not match
+
+        md-button.md-primary.md-raised(type='submit'
+        ng-click='signupForm.$invalid || SignupCtrl.submit(username, password)') sign up
