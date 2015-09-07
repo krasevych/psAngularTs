@@ -2,7 +2,8 @@
 /// <reference path="../../services/auth.ts" />
 
 class LoginFormCtrl {
-    constructor(private AuthSvc: AuthSvc) {}
+    constructor(private AuthSvc: AuthSvc) {
+    }
 
     canShowError(form: angular.IFormController,
                  fieldName: string) {
@@ -16,6 +17,7 @@ class LoginFormCtrl {
 
 angular.module('testing')
     .directive('loginForm', () => ({
+        restrict: 'AE',
         controller: LoginFormCtrl,
         controllerAs: 'LoginFormCtrl',
         scope: {},
