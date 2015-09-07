@@ -34,11 +34,11 @@ class AppController {
 }
 
 angular.module('testing', [
-    'ngCookies',
     'ngTouch',
     'ngSanitize',
     'ui.router',
     'ngMessages',
+    'ipCookie',
     'ngMaterial'
 ])
     .controller('AppController', AppController)

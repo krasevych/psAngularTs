@@ -1,10 +1,8 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
+/// <reference path="../../common/services/auth.ts" />
 
 class SignupCtrl {
-    public heading: string;
-
-    constructor() {
-        this.heading = 'Sign Up Page';
+    constructor(private AuthSvc: AuthSvc) {
     }
 
     /*@ngInject*/
@@ -17,6 +15,17 @@ class SignupCtrl {
             controllerAs: 'SignupCtrl'
         });
     }
+
+    canShowError(form: angular.IFormController,
+                 fieldName: string) {
+        return form.$invalid && (form.$submitted || form[fieldName].$touched);
+    }
+
+    submit(username: string, password: string) {
+        this.AuthSvc.createUser(username, password);
+    }
+
+
 }
 
 angular.module('testing')

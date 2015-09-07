@@ -7,6 +7,10 @@ class AuthSvc {
     login(username: string, password: string) {
         return this.HttpSvc.post('login', {username, password});
     }
+
+    createUser(username: string, password: string) {
+        return this.HttpSvc.post('signup', {username, password});
+    }
 }
 
 angular.module('testing')

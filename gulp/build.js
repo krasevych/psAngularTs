@@ -72,7 +72,7 @@ module.exports = options => {
         gulp.src([
             `${options.src}/**/*`,
             `!${options.src}/{app,app/**,common,common/**}`,
-            `!${options.src}/**/*.{html,css,js,less,ts,jade}`
+            `!${options.src}/**/*.{html,css,js,less,ts,jade,json}`
         ])
             .pipe(gulp.dest(options.dist)));
 
