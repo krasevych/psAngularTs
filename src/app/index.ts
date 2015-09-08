@@ -31,6 +31,12 @@ class AppController {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue');
     }
+
+    /*@ngInject*/
+    static routerError($log: angular.ILogService,
+                       $rootScope: angular.IRootScopeService) {
+        $rootScope.$on('$stateChangeError', (...params: any[]) => $log.error(params[5]));
+    }
 }
 
 angular.module('testing', [
@@ -42,7 +48,8 @@ angular.module('testing', [
     'ngMaterial'
 ])
     .controller('AppController', AppController)
-    .config(AppController.config);
+    .config(AppController.config)
+    .run(AppController.routerError);
 
 angular.element(document).ready(() =>
     angular.bootstrap(document, ['testing']));
