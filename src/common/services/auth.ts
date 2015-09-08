@@ -2,17 +2,17 @@
 /// <reference path="http.d.ts" />
 
 class AuthSvc {
-    constructor(private HttpSvc: IHttpSvc) {}
+    constructor(private httpSvc: IHttpSvc) {}
 
     login(username: string, password: string) {
-        return this.HttpSvc.post('login', {username, password});
+        return this.httpSvc.post('login', {username, password});
     }
 
     createUser(username: string, password: string) {
-        return this.HttpSvc.post('signup', {username, password});
+        return this.httpSvc.post('signup', {username, password});
     }
 }
 
 angular.module('testing')
-    .service('AuthSvc', AuthSvc);
+    .service('authSvc', AuthSvc);
 

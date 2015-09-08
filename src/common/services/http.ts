@@ -48,4 +48,4 @@ class HttpSvc {
 }
 
 angular.module('testing')
-    .service('HttpSvc', HttpSvc);
+    .service('httpSvc', HttpSvc);

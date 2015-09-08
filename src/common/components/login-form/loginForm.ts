@@ -2,8 +2,7 @@
 /// <reference path="../../services/auth.ts" />
 
 class LoginFormCtrl {
-    constructor(private AuthSvc: AuthSvc) {
-    }
+    constructor(private authSvc: AuthSvc) {}
 
     canShowError(form: angular.IFormController,
                  fieldName: string) {
@@ -11,7 +10,7 @@ class LoginFormCtrl {
     }
 
     submit(username: string, password: string) {
-        this.AuthSvc.login(username, password);
+        this.authSvc.login(username, password);
     }
 }
 

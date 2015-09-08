@@ -2,7 +2,7 @@
 /// <reference path="../../common/services/auth.ts" />
 
 class SignupCtrl {
-    constructor(private AuthSvc: AuthSvc) {
+    constructor(private authSvc: AuthSvc) {
     }
 
     /*@ngInject*/
@@ -22,7 +22,7 @@ class SignupCtrl {
     }
 
     submit(username: string, password: string) {
-        this.AuthSvc.createUser(username, password);
+        this.authSvc.createUser(username, password);
     }
 
 
