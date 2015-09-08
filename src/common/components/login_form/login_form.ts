@@ -20,6 +20,6 @@ angular.module('testing')
         controller: LoginFormCtrl,
         controllerAs: 'LoginFormCtrl',
         scope: {},
-        templateUrl: 'common/components/login-form/loginForm.html'
+        templateUrl: 'common/components/login_form/login_form.html'
 
     }));

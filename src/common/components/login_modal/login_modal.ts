@@ -1,5 +1,5 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
-/// <reference path="loginModal.d.ts" />
+/// <reference path="login_modal.d.ts" />
 
 class ModalCtrl {
     /*@ngInject*/
@@ -18,7 +18,7 @@ class LoginModalCtrl {
     openLoginModal(event: any) {
         this.$mdDialog.show({
             controller: ModalCtrl,
-            templateUrl: 'common/components/login-modal/loginModal.html',
+            templateUrl: 'common/components/login_modal/login_modal.html',
             targetEvent: event,
             clickOutsideToClose: true
         });
