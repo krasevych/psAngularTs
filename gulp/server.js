@@ -16,6 +16,7 @@ module.exports = options => {
 
         browserSync.instance = browserSync.init({
             open: false,
+            notify: false,
             timestamps: false,
             server: {
                 baseDir: baseDir,

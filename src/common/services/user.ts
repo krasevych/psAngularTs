@@ -10,7 +10,7 @@ class UserSvc {
 
     updateUser() {
         return new Promise((resolve: any, reject: any) => {
-            //this.httpSvc.secureGet('user').success((res: any) => {
+            // this.httpSvc.secureGet('user').success((res: any) => {
             this.httpSvc.secureGet('assets/jsons/user.json').success((res: any) => {
                 this.user = res;
                 this.$rootScope.$emit('user:updated', this.user);

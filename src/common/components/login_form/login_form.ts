@@ -3,7 +3,8 @@
 /// <reference path="../../services/user.ts" />
 
 class LoginFormCtrl {
-    constructor(private authSvc: AuthSvc,
+    constructor(private $state: angular.ui.IStateService,
+                private authSvc: AuthSvc,
                 private userSvc: UserSvc) {
     }
 
@@ -12,8 +13,12 @@ class LoginFormCtrl {
         return form.$invalid && (form.$submitted || form[fieldName].$touched);
     }
 
-    submit(username: string, password: string) {
-        this.authSvc.login(username, password).then(() => this.userSvc.updateUser());
+    submit(username: string,
+           password: string) {
+        this.authSvc.login(username, password).then(() => {
+            this.userSvc.updateUser();
+            this.$state.go('home');
+        });
     }
 }
 

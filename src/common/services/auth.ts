@@ -6,10 +6,18 @@
 class AuthSvc {
     private cookieName: string = 'cookie_name';
 
-    constructor(private httpSvc: IHttpSvc,
-                private $cacheFactory: angular.ICacheFactoryService,
+    constructor(private $cacheFactory: angular.ICacheFactoryService,
+                private httpSvc: IHttpSvc,
                 private userSvc: UserSvc,
                 private ipCookie: any) {
+        this.restoreUser();
+    }
+
+    restoreUser() {
+        const token = this.ipCookie(this.cookieName);
+        if (token) {
+            this.userSvc.updateUser();
+        }
     }
 
     getCookieSettings() {

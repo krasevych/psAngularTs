@@ -28,12 +28,36 @@ a {
   }
 }
 
+
+ul.h-list {
+  list-style: none;
+  li {
+    display: inline-block;
+  }
+}
+
 [ui-sref] {
   cursor: pointer;
 }
 
 [layout-padding] {
   padding: 0 30px;
+}
+
+.arrow {
+  &.bottom {
+    &:before {
+      content: "";
+      display: inline-block;
+      transform: translateY(50%);
+      margin: 5px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 4px 0;
+      border-color: #fff transparent transparent;
+    }
+  }
 }
 
 .description {
@@ -70,26 +94,15 @@ body > footer, .main-wrapper:after {
   height: @footer-height;
 }
 
-ul.h-list {
-  list-style: none;
-  li {
-    display: inline-block;
-  }
-}
-
-.titi {
-  font-family: 'Titillium Web', sans-serif;
-}
-
 .body-font {
   .font-roboto;
   line-height: 20px;
   font-weight: 300;
   font-size: 14px;
-  color: #2e2f44;
+  color: @text-black;
 
   a {
-    color: #0099cc;
+    color: @link;
     text-decoration: none;
     transition: color 0.2s ease-out;
   }

@@ -1,19 +1,55 @@
 @import (reference) "../../../app/_mixins";
 
-#header {
-  background: linear-gradient(to bottom,@bg-blue 0,#3f1e44 100%);
+md-menu-content.header-menu {
+  padding: 10px 30px;
+  button.md-button {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
 
-  .logo {
-    line-height: 0px;
+
+    &:focus, &:hover {
+      background-color: #fff;
+    }
+
+    &:hover span {
+      color: @link;
+    }
+
+    i {
+      padding-right: 10px;
+      margin-left: -10px;
+      vertical-align: middle;
+    }
   }
+}
+
+#header {
+  background: linear-gradient(to bottom,@bg-blue 0, #3f1e44 100%);
 
   a {
     vertical-align: middle;
     color: #fff;
   }
 
+  md-menu {
+    button.md-button {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
   md-toolbar {
     background: transparent;
+  }
+
+  .md-open-menu-container.md-active {
+    margin-top: 50px;
+  }
+
+  .logo {
+    line-height: 0px;
   }
 
   .md-toolbar-tools {
