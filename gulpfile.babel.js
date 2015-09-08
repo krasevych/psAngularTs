@@ -19,6 +19,9 @@ const options = {
     partials: '.tmp/partials',
     fonts: 'dist/fonts',
     wiredep: {directory: 'bower_components'},
+    additionalTypes: [
+        'es6-promise'
+    ],
     plumberHandler: {
         errorHandler: function (err) {
             gutil.log(gutil.colors.red(`Error: [${err.plugin}]`), err.message);

@@ -7,5 +7,6 @@ interface IHttpSvc {
     secureGet<T>(method: string, config?: angular.IRequestConfig): angular.IHttpPromise<T>;
     securePost<T>(method: string, data?: any, config?: angular.IRequestConfig): angular.IHttpPromise<T>;
     secureDelete<T>(method: string, config?: angular.IRequestConfig): angular.IHttpPromise<T>;
+    setSecureHeader(token: string): any;
 }
 

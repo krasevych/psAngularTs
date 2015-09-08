@@ -5,5 +5,12 @@ section#header(layout-padding)
                 a(ui-sref='home')
                     md-icon(md-svg-src='assets/images/icons/github.svg')
             nav(flex ng-include="'common/components/header/header_nav.html'")
-            md-button.md-primary(login-modal ng-if='HeaderCtrl.isShowLoginBtn') login
-            md-button.md-primary(ui-sref='signup') sign up
+            md-button.md-primary(ng-if='HeaderCtrl.isShowLoginBtn && !HeaderCtrl.user.username' login-modal) login
+            md-button.md-primary(ui-sref='signup' ng-if='!HeaderCtrl.user.username') sign up
+            md-menu(ng-if='HeaderCtrl.user.username')
+                md-button(aria-label='Open menu', ng-click='$mdOpenMenu($event)') {{HeaderCtrl.user.username}}
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button settings
+                    md-menu-item
+                        md-button(ng-click='HeaderCtrl.logout()') logout

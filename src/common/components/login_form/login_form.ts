@@ -1,8 +1,11 @@
 /// <reference path="../../../../.tmp/typings/tsd.d.ts" />
 /// <reference path="../../services/auth.ts" />
+/// <reference path="../../services/user.ts" />
 
 class LoginFormCtrl {
-    constructor(private authSvc: AuthSvc) {}
+    constructor(private authSvc: AuthSvc,
+                private userSvc: UserSvc) {
+    }
 
     canShowError(form: angular.IFormController,
                  fieldName: string) {
@@ -10,7 +13,7 @@ class LoginFormCtrl {
     }
 
     submit(username: string, password: string) {
-        this.authSvc.login(username, password);
+        this.authSvc.login(username, password).then(() => this.userSvc.updateUser());
     }
 }
 
@@ -21,5 +24,4 @@ angular.module('testing')
         controllerAs: 'LoginFormCtrl',
         scope: {},
         templateUrl: 'common/components/login_form/login_form.html'
-
     }));

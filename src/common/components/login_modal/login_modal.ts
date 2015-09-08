@@ -4,8 +4,10 @@
 class ModalCtrl {
     /*@ngInject*/
     constructor(public $scope: IScopeModalCtrl,
+                private $rootScope: angular.IRootScopeService,
                 private $mdDialog: angular.material.IDialogService) {
         $scope.$mdDialog = $mdDialog;
+        $rootScope.$on('user:updated', () => $mdDialog.hide());
     }
 }
 

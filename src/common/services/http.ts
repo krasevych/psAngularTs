@@ -1,7 +1,7 @@
 /// <reference path="../../../.tmp/typings/tsd.d.ts" />
 
 class HttpSvc {
-    public domain: string = 'test';
+    public domain: string = '';
     public headers: any = {'header': 'qwerty'};
     private methods: string[] = ['get', 'post', 'put', 'delete'];
     private methodsHasData: string[] = ['post', 'put'];
@@ -10,6 +10,12 @@ class HttpSvc {
     constructor(private $http: angular.IHttpService) {
         this.createMethods();
         this.createSecureMethods();
+    }
+
+    setSecureHeader(token: string) {
+        _.extend(this.secureHeaders, {
+            'auth-header': token
+        });
     }
 
     hasData(method: string) {
