@@ -5,5 +5,20 @@ section#header(layout-padding)
                 a(ui-sref='home')
                     md-icon(md-svg-src='assets/images/icons/github.svg')
             nav(flex ng-include="'common/components/header/header_nav.html'")
-            md-button.md-primary(login-modal ng-if='HeaderCtrl.isShowLoginBtn') login
-            md-button.md-primary(ui-sref='signup') sign up
+
+            md-button.md-primary(ng-if='HeaderCtrl.isShowLoginBtn && !HeaderCtrl.user.username' login-modal) login
+            md-button.md-primary(ui-sref='signup' ng-if='!HeaderCtrl.user.username') sign up
+            md-menu(ng-if='HeaderCtrl.user.username' md-position-mode="target-right target" md-offset='-30 55')
+                md-button(aria-label='Open menu', ng-click='$mdOpenMenu($event)')
+                    span {{HeaderCtrl.user.username}}
+                    i.arrow.bottom
+                md-menu-content(width='2' class='header-menu')
+                    md-menu-item
+                        md-button
+                            i.icon-settings
+                            span settings
+                    md-divider
+                    md-menu-item
+                        md-button(ng-click='HeaderCtrl.logout()')
+                            i.icon-sign-out
+                            span logout

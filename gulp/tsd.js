@@ -5,15 +5,12 @@ const gulp = require('gulp'),
     tsdJson = 'tsd.json',
     tsdApi = new tsd.getAPI(tsdJson);
 
-module.exports = () => {
+module.exports = options => {
     gulp.task('tsd:install', () => {
         const bower = require(path.join(process.cwd(), 'bower.json'));
-
-        const dependencies = [].concat(
-            Object.keys(bower.dependencies)
-        );
-
+        const dependencies = [...Object.keys(bower.dependencies), ...options.additionalTypes];
         const query = new tsd.Query();
+
         dependencies.forEach(dependency => query.addNamePattern(dependency));
 
         const tsdOptions = new tsd.Options();
