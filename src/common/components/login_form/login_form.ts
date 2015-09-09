@@ -24,7 +24,6 @@ class LoginFormCtrl {
 
 angular.module('testing')
     .directive('loginForm', () => ({
-        restrict: 'AE',
         controller: LoginFormCtrl,
         controllerAs: 'LoginFormCtrl',
         scope: {},

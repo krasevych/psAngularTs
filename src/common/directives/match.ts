@@ -7,7 +7,11 @@ angular.module('testing')
         scope: {
             match: '='
         },
-        link(scope: IMatchScope, element: JQuery, attrs: any, ctrl: IMatchNgModelCtrl) {
+        link(scope: IMatchScope,
+             element: JQuery,
+             attrs: any,
+             ctrl: IMatchNgModelCtrl) {
+
             ctrl.$validators.match = (modelValue: string) =>
             (_.isEmpty(scope.match) || ctrl.$pristine && _.isEmpty(modelValue)) || modelValue === scope.match;
 
