@@ -1,7 +1,7 @@
 {
 	"metadata": {
 		"name": "icomoon",
-		"lastOpened": 1445120646352,
+		"lastOpened": 1445120777565,
 		"created": 1445120631279
 	},
 	"iconSets": [
@@ -27980,7 +27980,7 @@
 					"prevSize": 24,
 					"code": 58059,
 					"name": "settings",
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": "settings"
 				},
 				{
@@ -40682,7 +40682,7 @@
 					"prevSize": 24,
 					"code": 58883,
 					"name": "fb",
-					"tempChar": ""
+					"tempChar": ""
 				},
 				{
 					"order": 0,
@@ -63685,7 +63685,7 @@
 					"prevSize": 32,
 					"code": 58880,
 					"name": "cancel",
-					"tempChar": ""
+					"tempChar": ""
 				},
 				{
 					"id": 66,
@@ -65972,7 +65972,7 @@
 					"prevSize": 32,
 					"code": 61490,
 					"name": "sign-out",
-					"tempChar": ""
+					"tempChar": ""
 				},
 				{
 					"id": 156,
@@ -71720,7 +71720,7 @@
 					"id": 1302,
 					"order": 2,
 					"prevSize": 32,
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": "twitter, brand11",
 					"name": "tw",
 					"code": 58881
@@ -71985,7 +71985,7 @@
 					"id": 1333,
 					"order": 3,
 					"prevSize": 32,
-					"tempChar": "",
+					"tempChar": "",
 					"ligatures": "github2, brand41",
 					"name": "gh",
 					"code": 58882
@@ -80278,7 +80278,7 @@
 		"historySize": 100,
 		"showCodes": false,
 		"quickUsageToken": {
-			"animatron-school": "OTdjMTkyMTU0MWM1YzBjOGFlZmZiMTY4MjA0NTUxMTcjMSMxNDQxMTk4ODUwIyMj"
+			"icomoon": "OGU0ZmM5NmY1YmQyMjY0NDFjNGRjMGFiMTNiMDNmMjUjMSMxNDQ1MTIwODEwIyMj"
 		},
 		"fontHostingName": false
 	},
