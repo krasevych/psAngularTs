@@ -11,5 +11,5 @@ module.exports = options =>
 
         gulp.watch(options.ts, event => onlyChange(event, 'scripts'));
 
-        gulp.watch(options.jade, ['views']);
+        gulp.watch(options.jade, () => gulp.start('views'));
     });

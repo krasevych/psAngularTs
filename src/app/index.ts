@@ -1,4 +1,5 @@
-/// <reference path="../../.tmp/typings/tsd.d.ts" />
+///<reference path="index.d.ts"/>
+
 
 class AppController {
     /*@ngInject*/

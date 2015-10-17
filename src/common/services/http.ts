@@ -1,4 +1,4 @@
-/// <reference path="../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../../app/index.d.ts"/>
 
 class HttpSvc {
     public domain: string = '';

@@ -1,4 +1,4 @@
-/// <reference path="../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../../app/index.d.ts"/>
 /// <reference path="http.d.ts" />
 
 class UserSvc {

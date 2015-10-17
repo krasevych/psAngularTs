@@ -76,7 +76,7 @@ module.exports = options => {
         ])
             .pipe(gulp.dest(options.dist)));
 
-    gulp.task('clean', ['tsd:purge'], done => $.del([options.dist, options.tmp], done));
+    gulp.task('clean', done => $.del([options.dist, options.tmp], done));
 
     gulp.task('build', cb =>
         runSequence('clean', ['html', 'fonts', 'other'], cb));

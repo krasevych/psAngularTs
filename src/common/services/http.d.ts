@@ -1,4 +1,4 @@
-/// <reference path="../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../../app/index.d.ts"/>
 
 interface IHttpSvc {
     get<T>(method: string, config?: angular.IRequestConfig): angular.IHttpPromise<T>;
