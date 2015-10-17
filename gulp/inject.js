@@ -6,8 +6,7 @@ const gulp = require('gulp'),
 
 
 module.exports = options =>
-    gulp.task('inject', (cb) =>
-        runSequence('tsd:install', ['scripts', 'styles'], () => {
+    gulp.task('inject', ['scripts', 'styles'], (cb) => {
             const getInjectSrc = name => gulp.src(name, {read: false});
             const injectOptions = {
                 ignorePath: [options.src, options.tmp],
@@ -20,4 +19,4 @@ module.exports = options =>
                 .pipe(wiredep(options.wiredep))
                 .pipe(gulp.dest(options.tmp)).on('end', cb)
                 .pipe(browserSync.reload({stream: true}));
-        }));
+        });

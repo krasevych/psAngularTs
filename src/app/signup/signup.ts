@@ -1,4 +1,4 @@
-/// <reference path="../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../index.d.ts"/>
 /// <reference path="../../common/services/auth.ts" />
 
 class SignupCtrl {

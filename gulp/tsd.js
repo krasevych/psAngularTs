@@ -6,7 +6,7 @@ const gulp = require('gulp'),
     tsdApi = new tsd.getAPI(tsdJson);
 
 module.exports = options => {
-    gulp.task('tsd:install', () => {
+    gulp.task('tsd:install', ['tsd:purge'], () => {
         const bower = require(path.join(process.cwd(), 'bower.json'));
         const dependencies = [...Object.keys(bower.dependencies), ...options.additionalTypes];
         const query = new tsd.Query();

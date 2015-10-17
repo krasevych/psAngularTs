@@ -2,13 +2,13 @@
   "name": "testing",
   "version": "0.0.0",
   "dependencies": {
-    "underscore": "~1.7.0",
+    "underscore": "~1.8.3",
     "angular": "~1.4.1",
     "angular-cookie": "~4.0.9",
     "angular-touch": "~1.4.1",
     "angular-sanitize": "~1.4.1",
     "angular-ui-router": "~0.2.15",
-    "angular-material": "~0.10.1",
+    "angular-material": "~0.11.0",
     "angular-messages": "~1.4.1"
   },
   "resolutions": {

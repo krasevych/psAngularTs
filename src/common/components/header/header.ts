@@ -1,4 +1,4 @@
-/// <reference path="../../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../../../app/index.d.ts"/>
 /// <reference path="../../services/auth.ts" />
 /// <reference path="../../services/user.ts" />
 

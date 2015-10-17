@@ -1,4 +1,4 @@
-/// <reference path="../../../../.tmp/typings/tsd.d.ts" />
+///<reference path="../../../app/index.d.ts"/>
 /// <reference path="login_modal.d.ts" />
 
 class ModalCtrl {
